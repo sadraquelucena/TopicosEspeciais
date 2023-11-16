@@ -1,0 +1,5 @@
+- source: slides-01.qmd
+  quarto-pub:
+    - id: 55651d97-f399-4642-92ec-0939a99fc55f
+      url: 'https://sadraquelucena.quarto.pub/estat0016-slides-01'
+

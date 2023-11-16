@@ -1,0 +1,59 @@
+---
+title: "Usando Git e GitHub com RStudio"
+author: "Prof. Dr. Sadraque E. F. Lucena"
+lang: pt         # Língua: português
+format: pdf
+bibliography: referencias.bib
+df-print: paged  # Como data frames aparecem no documento
+                 # opções: "default", "kable", "tibble" e "paged"
+csl: abnt.csl    # referências no formato da ABNT
+---
+
+## Git
+
+- Sistema aberto de controle de versão amplamente utilizado para rastrear alterações em arquivos e colaborar no desenvolvimento de projetos.
+- Foi desenvolvido originalmente em 2005 por Linus Torvalds, criador do kernel do sistema operacional Linux.
+
+## GitHub
+
+- Plataforma mais popular de hospedagem de código para controle de versão e colaboração. 
+- Permite que você e outras pessoas trabalhem em conjunto em projetos de qualquer lugar.
+- Para usar o GitHub você precisa ter uma conta e acesso à internet.
+- Para criar uma conta, acesse: <https://github.com/>.
+
+## Glossário
+
+- **Repositório:** é como uma pasta de projetos que contém todos os arquivos do projeto e seu histórico de revisões. Pode ser compartilhado com colaboradores e configurado como público ou privado.
+
+  - **repositório local:** pasta na sua máquina local;
+  - **repositório na núvem:** pasta no GitHub.
+
+- **Commit:** é uma versão dos arquivos (código). Cada commit representa um ponto específico na história do projeto e ajuda a controlar o progresso e as alterações ao longo do tempo.
+
+## Download
+
+- Acesse: <https://git-scm.com/downloads>;
+- Escolha o sistema operacional e instale.
+
+## Requisitos
+
+- R e Rstudio instalados;
+- Git instalado;
+- Ter uma conta no GitHub.
+
+## Verificando se o Git está instalado
+
+No *Terminal* do RStudio, digite `which git` para solicitar o caminho para o seu executável do Git. Para ver a versão do Git digite `git --version`
+
+## Apresentando-se ao Git
+
+Forneça seu nome e e-mail associados à conta do GitHub:
+
+`git config --global user.name 'Fulano de Tal'`
+
+`git config --global user.email 'fulano@exemplo.com'`
+
+## Crie um repositório Git no diretório especificado
+
+`git init <diretorio>`
+

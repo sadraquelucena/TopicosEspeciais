@@ -1,0 +1,8 @@
+.dstq {
+  font-weight: bold;
+  color: #C42F11 !important;
+}
+
+a:link {
+	color: #C42F11;
+	}

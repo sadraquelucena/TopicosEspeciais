@@ -1,0 +1,8 @@
+library(usethis)
+
+# Configurando o Git
+use_git_config(user.name = "Sadraque",
+               user.email = "sadraquelucena@academico.ufs.br")
+
+# Clonar repositório
+usethis::create_from_github("https://github.com/sadraquelucena/TopicosEspeciais")

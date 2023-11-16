@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Dr.&nbsp;Sadraque E. F. Lucena">
+
+<title>Git e GitHub</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="AprendMaquina-02-GitHub_files/libs/clipboard/clipboard.min.js"></script>
+<script src="AprendMaquina-02-GitHub_files/libs/quarto-html/quarto.js"></script>
+<script src="AprendMaquina-02-GitHub_files/libs/quarto-html/popper.min.js"></script>
+<script src="AprendMaquina-02-GitHub_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="AprendMaquina-02-GitHub_files/libs/quarto-html/anchor.min.js"></script>
+<link href="AprendMaquina-02-GitHub_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="AprendMaquina-02-GitHub_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="AprendMaquina-02-GitHub_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="AprendMaquina-02-GitHub_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="AprendMaquina-02-GitHub_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<link href="AprendMaquina-02-GitHub_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="AprendMaquina-02-GitHub_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Git e GitHub</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Dr.&nbsp;Sadraque E. F. Lucena </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Esse conteúdo foi baseado no livro <em>R for Data Science, 2nd Edition</em> de <span class="citation" data-cites="Wickham2023">WICKHAM; ÇETINKAYA-RUNDEL; GROLEMUND (<a href="#ref-Wickham2023" role="doc-biblioref">2023</a>)</span>, no tutorial <em>E aí, vamos falar de Quarto?</em> disponível em <a href="https://rladies-sp.org/posts/2023-02-tutorial-quarto/" class="uri">https://rladies-sp.org/posts/2023-02-tutorial-quarto/</a> e no guia do Quarto disponível em <a href="https://quarto.org/docs/guide/" class="uri">https://quarto.org/docs/guide/</a>.</p>
+<section id="quarto" class="level2">
+<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
+<p>O Quarto oferece um <em>framework</em> unificado de autoria para ciência de dados, combinando seu código, seus resultados e seu texto. Os documentos do Quarto são totalmente reproduzíveis e suportam dezenas de formatos de saída, como PDFs, arquivos do Word, apresentações e muito mais.</p>
+<p>Os arquivos do Quarto são versáteis e destinam-se a três usos principais:</p>
+<ol type="1">
+<li><p>Comunicar conclusões a tomadores de decisão que não desejam se aprofundar no código;</p></li>
+<li><p>Colaborar com outros cientistas de dados interessados em conclusões e metodologia;</p></li>
+<li><p>Servir como um ambiente de ciência de dados no qual você pode capturar não apenas o que fez, mas também o que estava pensando.</p></li>
+</ol>
+<p>Quarto não é um pacote do R, é uma ferramenta de linha de comando qu epode ser usada no RStudio. Ele representa uma evolução do R Markdown e oferece suporte nativo a várias linguagens de programação, incluindo Python e Julia, além do R.</p>
+</section>
+<section id="pré-requisitos" class="level2">
+<h2 class="anchored" data-anchor-id="pré-requisitos">Pré-requisitos</h2>
+<p>Baixar e instalar a versão mais recente do:</p>
+<ul>
+<li><p>Quarto;</p></li>
+<li><p>R;</p></li>
+<li><p>RStudio.</p></li>
+</ul>
+<p>Uma alternativa é o uso do <em>Posit Cloud</em> (<a href="https://posit.cloud/" class="uri">https://posit.cloud/</a>), que simplifica a exploração das ferramentas do RStudio na nuvem, sem a necessidade de configurações complexas.</p>
+</section>
+<section id="começando" class="level2">
+<h2 class="anchored" data-anchor-id="começando">Começando</h2>
+<p>Primeiro crie um projeto.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imagens/projeto.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fonte: https://rladies-sp.org/</figcaption>
+</figure>
+</div>
+<p>O arquivo quarto editável tem extensão <em>.qmd</em>. Para renderizá-lo clique em <em>render</em> ou utilize o atalho do teclado <code>CTRL + SHIFT + K</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imagens/render.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fonte: https://rladies-sp.org/</figcaption>
+</figure>
+</div>
+</section>
+<section id="entendendo-a-estrutura-de-um-documento-em-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="entendendo-a-estrutura-de-um-documento-em-quarto">Entendendo a estrutura de um documento em Quarto</h2>
+<p>Um documento em quarto é composto por três partes:</p>
+<ol type="1">
+<li><p><strong>YAML (<em>Yet Another Markup Language</em>, Mais uma linguagem de marcação):</strong> a seção inicial do documento onde são especificadas configurações como formatação, data, título, autor, e outros detalhes. Essa seção é sempre posicionada no início do documento e é delimitada por - - -.</p></li>
+<li><p><strong>Texto:</strong> utiliza a sintaxe do Markdown como seu principal formato de documento;</p></li>
+<li><p><strong>Código:</strong> é compatível com várias linguagens, o que permite a inserção de blocos de código em R, Python, Julia e outras.</p></li>
+</ol>
+<section id="yaml" class="level3">
+<h3 class="anchored" data-anchor-id="yaml">YAML</h3>
+<p>Abaixo temos um exemplo de cabeçalho com as configuraçãoes iniciais e diretrizes para criação do arquivo. Iremos detalhar cada um deles.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Meu primeiro documento"</span><span class="co"> # -----&gt; Título</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span><span class="co">             # formato do documento gerado</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # oculta o bloco de códigos</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> pt</span><span class="co">            # Linguagem: português</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p>Em YAML, os elementos são chamados de <em>pares chave-valor</em>.</p></li>
+<li><p>Algumas chaves que podemos usar no YAML são:</p>
+<ul>
+<li><p><strong>title:</strong> para inserir o título do documento</p></li>
+<li><p><strong>author:</strong> para indicar o nome do(a) autor(a). Esta chave possui sub-chaves adicionais para artigos acadêmicos.</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Sadraque E. F, Lucena</span><span class="co">                  # nome</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Universidade Federal de Sergipe</span><span class="co"> # instituição</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>author</strong> e <strong>affiliation</strong> podem receber múltiplos elementos.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Sadraque E. F, Lucena</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> Universidade Federal de Sergipe</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> Funpresp-Exe</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fulano de Tal</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Universiade Federal da Bahia</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p><strong>lang:</strong></p></li>
+<li><p><strong>date:</strong></p></li>
+</ul></li>
+</ul>
+<p>Para obter mais informações sobre autoria, filiação, resumo, palavras-chave, etc., visite: https://quarto.org/docs/authoring/front-matter.html.</p>
+</section>
+</section>
+<section id="blocos-de-código" class="level2">
+<h2 class="anchored" data-anchor-id="blocos-de-código">Blocos de código</h2>
+<p>Para dominar o uso do Quarto é essencial começar pelos blocos de código. Eles constituem a base para incorporar análises, visualizações e interatividade no desenvolvimento de documentos.</p>
+<p>Os blocos de código iniciam com três crases seguidos do nome da linguagem utilizada. Em seguida você pode definir configurações ou parâmetros para o bloco de código. Algumas das principais opções são:</p>
+<ul>
+<li><p><code>#| echo:</code> controla se o código é exibido no documento.</p></li>
+<li><p><code>#| eval:</code> determina se o código é executado e a saída apresentada.</p></li>
+<li><p><code>#| warning:</code> controla a exibição de mensagens de aviso geradas pelo código.</p></li>
+<li><p><code>#| error:</code> determina se os erros devem ser incluídos na saída.</p></li>
+<li><p><code>#| include:</code> controla se o trecho de código e a saída são incluídos no documento renderizado.</p></li>
+<li><p><code>#| label:</code> rótulo dado para fazer referência. Uma vez definido um rótulo, você pode referenciá-lo usando <code>@nome_do_rotulo</code>.</p></li>
+<li><p><code>#| fig-cap:</code> adiciona uma legenda a gráficos gerados pelo código.</p></li>
+</ul>
+<p>Exemplo:</p>
+<p>A <a href="#fig-airquality">Figura&nbsp;1</a> explora o impacto da temperatura no nível de ozônio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone)) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Temperatura  (°F)"</span>, <span class="at">y =</span> <span class="st">"Ozônio (ppb)"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-airquality" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="AprendMaquina-02-GitHub_files/figure-html/fig-airquality-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;1: Qualidade do ar</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se preferir, você pode incluir as configurações na primeira linha do trecho de código (<code>```{r, echo = FALSE}</code>), mas é menos recomendado.</p>
+</div>
+</div>
+<p>Outro exemplo:</p>
+<div class="cell">
+<details>
+<summary>Mostrar o código</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(airquality)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   153 obs. of  6 variables:
+ $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
+ $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+ $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+ $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
+ $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
+ $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+</div>
+</div>
+<p>Mais um exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(airquality)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Ozone"],"name":[1],"type":["int"],"align":["right"]},{"label":["Solar.R"],"name":[2],"type":["int"],"align":["right"]},{"label":["Wind"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Temp"],"name":[4],"type":["int"],"align":["right"]},{"label":["Month"],"name":[5],"type":["int"],"align":["right"]},{"label":["Day"],"name":[6],"type":["int"],"align":["right"]}],"data":[{"1":"41","2":"190","3":"7.4","4":"67","5":"5","6":"1","_rn_":"1"},{"1":"36","2":"118","3":"8.0","4":"72","5":"5","6":"2","_rn_":"2"},{"1":"12","2":"149","3":"12.6","4":"74","5":"5","6":"3","_rn_":"3"},{"1":"18","2":"313","3":"11.5","4":"62","5":"5","6":"4","_rn_":"4"},{"1":"NA","2":"NA","3":"14.3","4":"56","5":"5","6":"5","_rn_":"5"},{"1":"28","2":"NA","3":"14.9","4":"66","5":"5","6":"6","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="formatação-de-texto" class="level2">
+<h2 class="anchored" data-anchor-id="formatação-de-texto">Formatação de texto</h2>
+<p>Algumas opçoes são: <em>itálico</em>, <strong>negrito</strong>, <strong><em>itálico negrito</em></strong>, sobrescrito<sup>2</sup>, subscrito<sub>2</sub>, <del>riscado</del>, <code>código literal</code>.</p>
+<section id="seções" class="level3">
+<h3 class="anchored" data-anchor-id="seções">Seções</h3>
+<p>Uma seção e as subseções são definidas pela quantidade de <code>#</code>. Exemplos:</p>
+</section>
+</section>
+<section id="seção-1" class="level1">
+<h1>Seção 1</h1>
+<section id="subseção-1" class="level2">
+<h2 class="anchored" data-anchor-id="subseção-1">Subseção 1</h2>
+<section id="subsubseção-1" class="level3">
+<h3 class="anchored" data-anchor-id="subsubseção-1">Subsubseção 1</h3>
+<section id="subsubsubseção-1" class="level4">
+<h4 class="anchored" data-anchor-id="subsubsubseção-1">Subsubsubseção 1</h4>
+<section id="subsubsubsubseção-1" class="level5">
+<h5 class="anchored" data-anchor-id="subsubsubsubseção-1">Subsubsubsubseção 1</h5>
+<section id="subsubsubsubsubseção-1" class="level6">
+<h6 class="anchored" data-anchor-id="subsubsubsubsubseção-1">Subsubsubsubsubseção 1</h6>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="links-e-imagens" class="level2">
+<h2 class="anchored" data-anchor-id="links-e-imagens">Links e imagens</h2>
+<section id="links" class="level3">
+<h3 class="anchored" data-anchor-id="links">Links</h3>
+<p>Para acessar a página web do Quarto, visite <a href="https://quarto.org" class="uri">https://quarto.org</a>. Você também pode consultar o <a href="https://quarto.org">guia de uso do Quarto</a> para mais informações, explorar recursos avançados e manter-se atualizado.</p>
+</section>
+<section id="imagens" class="level3">
+<h3 class="anchored" data-anchor-id="imagens">Imagens</h3>
+<p>A imagem abaixo apresenta a logo do Quarto. Por padrão, a o tmanho é dado em pixels, mas você também pode definí-lo em porcentagem (exemplo: {width=80%}), em centímetros (exemplo: {width=5cm}) ou polegadas (exemplo: {width=4in}). Você também pode colocar vários definições da imagem em argumentos separados por espaço.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://quarto.org/quarto-dark-bg.jpeg" class="img-fluid figure-img" width="300"></p>
+<figcaption class="figure-caption">Logo do Quarto</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imagens/logo_quarto.png" class="img-fluid figure-img" width="200"></p>
+<figcaption class="figure-caption">Logo hexagonal</figcaption>
+</figure>
+</div>
+<p>Também é possível juntar mais de uma figura.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="https://quarto.org/quarto-dark-bg.jpeg" title="Logo" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="imagens/logo_quarto.png" title="Logo hexagonal" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="listas" class="level2">
+<h2 class="anchored" data-anchor-id="listas">Listas</h2>
+<p>Listas em Quarto requerem uma linha em branco inteira acima da lista. Caso contrário, a lista não será exibida no formato de lista, e todo o conteúdo aparecerá como texto comum em uma única linha. Subitens são identificados com um tab.</p>
+<ul>
+<li>Lista sem ordem
+<ul>
+<li>subitem 1</li>
+<li>subitem 2
+<ul>
+<li>subsubitem 1</li>
+</ul></li>
+</ul></li>
+</ul>
+<ol type="1">
+<li>Lista ordenada</li>
+<li>Item 2
+<ol type="i">
+<li>subitem 1
+<ol type="A">
+<li>subsubitem 1</li>
+</ol></li>
+</ol></li>
+</ol>
+<div>
+<ol type="1">
+<li>Uma lista</li>
+</ol>
+</div>
+<div>
+<ol type="1">
+<li>Seguida de outra lista</li>
+</ol>
+</div>
+</section>
+<section id="tabelas" class="level2">
+<h2 class="anchored" data-anchor-id="tabelas">Tabelas</h2>
+<table class="table-striped table-hover table">
+<caption>Exemplo de tabela</caption>
+<thead>
+<tr class="header">
+<th>Default</th>
+<th style="text-align: left;">Esquerda</th>
+<th style="text-align: right;">Direita</th>
+<th style="text-align: center;">Centro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>12</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr class="even">
+<td>123</td>
+<td style="text-align: left;">123</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: center;">123</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Também é possível usar tabelas de grade, que são um tipo mais avançado de tabelas em Markdown que permitem elementos de bloco arbitrários (múltiplos parágrafos, blocos de código, listas, etc.). Por exemplo:</p>
+<table class="table">
+<caption>Exemplo de tabela de grade.</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fruta</th>
+<th>Preço</th>
+<th>Vantagens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Banana</td>
+<td>R$3,50/kg</td>
+<td><ul>
+<li>Fonte de potássio</li>
+<li>Fácil de transportar</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Laranja</td>
+<td>R$6,99/kg</td>
+<td><ul>
+<li>Alto teor de vitamina C</li>
+<li>Fibra dietética</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="equações" class="level2">
+<h2 class="anchored" data-anchor-id="equações">Equações</h2>
+<p>Utilize delimitadores <code>$</code> para fórmulas e símbolos matemáticos embutidos no texto e <code>$$</code> fórmulas e símbolos matemáticos destacados. Você pode usar os comandos do LaTeX no ambiente matemático.</p>
+<ul>
+<li><p><strong>Exemplo:</strong> Seja <span class="math inline">\(X\sim N(\mu, \sigma^2)\)</span> uma variável aleatória. Sua função de densidade é dada por</p>
+<p><span class="math display">\[ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \]</span> em que <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>, <span class="math inline">\(-\infty&lt;\mu&lt;\infty\)</span> e <span class="math inline">\(\sigma^2&gt;0\)</span>.</p></li>
+</ul>
+</section>
+<section id="citação" class="level2">
+<h2 class="anchored" data-anchor-id="citação">Citação</h2>
+<p>Existem várias formas de fazer citação em Quarto. Vamos ver a citação em BibLaTeX (arquivos com extensão <code>.bib</code>).</p>
+<p>Primeiro você precisa informar o arquivo com as referências no YAML. Por padrão é usado o formato Chicago Manual of Style com autor e data, mas você pode especificar uma formatação personalizada usando o CSL (Citation Style Language). Você pode encontrar arquivos CSL ou saber mais sobre como usar estilos no Projeto CSL. Você pode navegar na lista de mais de 8.500 definições CSL Creative Commons no <a href="https://github.com/citation-style-language/styles">repositório central do Projeto CSL</a> ou no <a href="https://www.zotero.org/styles">repositório de estilos do Zotero</a>. Exemplo:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>title: Título</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>bibliography: references.bib</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>csl: abnt.csl</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>---</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Os tipos de citação mais comuns são <span class="citation" data-cites="Wickham2023">WICKHAM; ÇETINKAYA-RUNDEL; GROLEMUND (<a href="#ref-Wickham2023" role="doc-biblioref">2023</a>)</span> e <span class="citation" data-cites="Wickham2023">(<a href="#ref-Wickham2023" role="doc-biblioref">WICKHAM; ÇETINKAYA-RUNDEL; GROLEMUND, 2023</a>)</span>. O arquivo csl com a formatação da ABNT pode ser encontrada <a href="https://www.zotero.org/styles?q=id%3Ainstituto-brasileiro-de-informacao-em-ciencia-e-tecnologia-abnt">aqui</a>.</p>
+</section>
+<section id="publicando-no-quarto-pub" class="level2">
+<h2 class="anchored" data-anchor-id="publicando-no-quarto-pub">Publicando no Quarto Pub</h2>
+<p>Quarto Pub é um serviço gratuito de publicação para conteúdo criado com o Quarto. O Quarto Pub é ideal para blogs, sites de cursos ou projetos, livros, apresentações e sites pessoais.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todos os documentos e sites publicados no Quarto Pub são visíveis publicamente, não podem ter tamanho superior a 100 MB e possuem um limite de tráfego de dados de 10 GB por mês.</p>
+</div>
+</div>
+<p>Para publicar, abra a aba <strong>Terminal</strong> e execute <code>quarto publish</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Dica
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se a aba não estiver visível, mostre-a usando Shift+Alt+T (ou clique em Tools-&gt;Terminal-&gt;Move Focus to Terminal).</p>
+</div>
+</div>
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Referências</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list">
+<div id="ref-Wickham2023" class="csl-entry" role="listitem">
+WICKHAM, Hadley; ÇETINKAYA-RUNDEL, Mine; GROLEMUND, Garrett. <strong>R for data science: Import, tidy, transform, visualize, and model data</strong>. Sebastopol, CA: O’Reilly, 2023.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

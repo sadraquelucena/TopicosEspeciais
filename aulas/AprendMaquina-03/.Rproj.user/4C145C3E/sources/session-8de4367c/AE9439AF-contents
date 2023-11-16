@@ -1,0 +1,864 @@
+---
+title: "Tratando os dados"
+subtitle: "ESTAT0016 -- Tópicos Especiais em Estatística (Introdução à Apredizagem de Máquina)"
+author: "Prof. Dr. Sadraque E.F. Lucena"
+logo: images/ufs_horizontal_positiva.png
+format: 
+  revealjs:
+    theme: slides.scss
+    multiplex: true    # permite visualização simultânea por várias pessoas
+    transition: fade
+    slide-number: true
+    auto-stretch: false
+    menu: false
+    self-contained: false
+    width: 1600
+    height: 900
+    css: slides.css
+    echo: false
+    code-link: true
+editor: source
+---
+
+## Tratando os dados
+
+-   A qualidade de um modelo de aprendizado de máquina é tão boa quanto os dados usados para construí-lo.
+
+-   Antes de construir um modelo, é crucial investir tempo coletando, explorando e preparando os dados para a abordagem de aprendizado de máquina selecionada.
+
+-   Segundo Nwanganga e Chapple (2020), 80% do tempo gasto em aprendizado de máquina é, ou deve ser, dedicado ao tratamento dos dados.
+
+## Tidyverse
+
+-   O tidyverse é uma coleção de pacotes R projetados para facilitar todo o processo de análise dos dados. Os principais pacotes que o compõem incluem:
+
+    -   [**readr**]{.dstq} para importar dados no R de diversos formatos de arquivo.
+    -   [**tibble**]{.dstq} para armazenar dados em um formato padronizado.
+    -   [**dplyr**]{.dstq} para manipular dados.
+    -   [**ggplot2**]{.dstq} para visualizar dados.
+    -   [**tidyr**]{.dstq} para transformar dados em formato "tidy".
+    -   [**purrr**]{.dstq} para programação funcional.
+    -   [**stringr**]{.dstq} para manipular strings.
+    -   [**lubridate**]{.dstq} para manipular datas e horas.
+
+## Coleta de Dados em Aprendizado de Máquina
+
+-   Processo de adquirir dados essenciais para o aprendizado de máquina.
+
+-   A quantidade e tipo de dados dependem do problema e algoritmo selecionado.
+
+-   Em problemas de aprendizado de máquina supervisionado, além das variáveis que descrevem os atributos, os dados devem incluir um rótulo que representa o resultado para cada observação.
+
+-   Em aprendizado de máquina não supervisionado, rótulos não são necessários para cada observação.
+
+    -   Em vez disso, o foco é identificar formas interessantes de agrupar dados para atribuir rótulos significativos posteriormente.
+
+## Coleta de Dados em Aprendizado de Máquina
+
+### Quantidade de dados
+
+-   A quantidade de dados necessária para treinar um modelo depende do tipo de abordagem de aprendizado de máquina escolhida.
+
+-   Alguns algoritmos funcionam bem com pequenas quantidades de dados, enquanto outros requerem mais dados.
+
+-   Compreender as vantagens e desvantagens de cada abordagem ajuda a determinar a quantidade adequada de dados.
+
+-   Além da quantidade, a variabilidade dos dados também é importante.
+
+    -   Por exemplo, se a renda é usada para prever resultados de empréstimos, é vantajoso coletar dados de clientes com diferentes níveis de renda.
+
+    -   Isso permite ao modelo entender como a renda afeta os resultados dos empréstimos.
+
+## Coleta de Dados em Aprendizado de Máquina
+
+### Ética
+
+-   Ética na coleta de dados envolve considerações como privacidade, segurança, consentimento informado e viés.
+
+    -   Por exemplo, se houver viés nos dados usados para treinar um modelo, o modelo também replicará esse viés em suas previsões.
+
+-   Previsões tendenciosas podem ser prejudiciais, especialmente quando afetam populações sub-representadas nos dados.
+
+-   Dados tendenciosos frequentemente se originam de viés humano no processo de coleta ou da falta de dados sobre certas subpopulações.
+
+## Importando os Dados
+
+-   O pacote [**readr**]{.dstq} costuma ser o primeiro pacote do tidyverse utilizado na maioria dos códigos R para aprendizado de máquina.
+
+    -   Os dados são importados em uma estrutura chamada [**tibble**]{.dstq} e podem ser carregados diretamente do disco ou de uma URL.
+
+-   O formato de arquivo mais comum é *comma-separated value* (CSV). Ele é lido com a função [**read_csv()**]{.dstq}.
+
+![](images/csv.png){fig-align="center" width="29.2cm"}
+
+-   Outros comandos também podem ser usados. Exemplo: [**readxl::read_xlsx()**]{.dstq} para arquivos com extensão ".xlsx".
+
+# Explorando os Dados
+
+## Explorando os Dados
+
+-   Um dos pontos cruciais em ciência de dados é passar um tempo compreendendo os dados.
+
+-   A exploração dos dados nos permite responder perguntas como:
+
+    -   Quants linhas e colunas os dados possuem?
+
+    -   Quais tipos de variáveis estão presentes nos dados?
+
+    -   Existem valores faltando, inconsistentes ou duplicados nos dados?
+
+    -   Existem *outliers* nos dados?
+
+-   Para responder a essas perguntas, precisamos descrever os dados usando resumos estatísticos e gráficos.
+
+## Explorando os Dados
+
+-   Na exploração de dados, precisamos descrever os dados de forma compreensível.
+
+-   No aprendizado de máquina, usamos termos para descrever a estrutura e os valores nos dados.
+
+### Instância (*instance*)
+
+-   Uma *instância* é uma linha dos dados.
+
+-   Ela representa uma unidade amostral que possui um conjunto de atributos.
+
+-   Um conjunto de dados é composto por várias instâncias.
+
+-   Elas também podem ser chamadas de *registros*, *exemplos* ou *observações*.
+
+## Atributos (*feature*)
+
+-   Um *atributo* é uma coluna de dados que representa uma propriedade ou característica de uma instância, isto é, uma *variável*.
+
+-   Cada instância possui vários atributos que podem ser categorizados com base no tipo de dados que eles contêm e podem ser descritos como atributos discretos ou contínuos.
+
+-   Atributos também podem ser categorizados de acordo com sua função em aprendizado supervisionado.
+
+    -   Atributos que descrevem os dados são conhecidos como *variáveis independentes*.
+
+    -   Atributos que representam o rótulo são chamadas de *variáveis dependentes*.
+
+        -   Em problemas de classificação a variável depedente é chamada *classe*.
+
+        -   Em problemas de regressão a variaǘel dependente é chamada de *resposta*.
+
+## 
+
+![Fonte: Adaptado de Nwanganga e Chapple (2020)](images/amostra_dados.png){fig-align="center"}
+
+## Dimensionalidade
+
+-   A dimensionalidade de um conjunto de dados representa o número de atributos.
+
+-   Quanto maior a dimensionalidade do conjunto de dados, mais detalhes temso sobre os dados, mas também aumenta a complexidade computacional e o consumo de recursos.
+
+-   Posteriormente, discutiremos algumas abordagens para reduzir a dimensionalidade de um conjunto de dados, a fim de facilitar o trabalho com aprendizado de máquina.
+
+## Esparsidade e Densidade
+
+-   A esparsidade e a densidade dos dados descrevem o grau de existência de dados para os atributos em um conjunto de dados. Exemplo:
+
+    -   Se 20% dos valores em um conjunto de dados estão ausentes ou indefinidos, o conjunto de dados é considerado 20% esparso.
+
+    -   A densidade é o complemento da esparsidade, então um conjunto de dados que é 20% esparso também é considerado 80% denso.
+
+## Resolução
+
+-   Resolução descreve o nível de detalhe dos dados.
+
+-   Quanto mais detalhados são os dados, maior a resolução, e quanto menos detalhados, menor a resolução. Exemplo:
+
+    -   Dados de vendas no varejo no nível individual de compras de clientes têm alta resolução.
+
+    -   Por outro lado, dados de vendas resumidos no nível estadual ou regional têm baixa resolução.
+
+-   A resolução apropriada é ditada pelo problema de negócios e pela tarefa de aprendizado de máquina.
+
+    -   Se a resolução dos dados for muito alta, padrões importantes podem ser obscurecidos pelo ruído, mas se a resolução for muito baixa, padrões importantes podem desaparecer.
+
+## Estatística descritiva
+
+-   A estatística descritiva é útil na exploração e compreensão dos dados.
+
+-   Frequência e modea são medidas úteis para descrever atributos categóricos.
+
+-   Para dados contínuos, média e mediana são estatísticas mais usadas para descrever as propriedades dos dados.
+
+-   No R, um resumo das estatísticas pode ser obtido com a função [**summary()**]{.dstq}.
+
+    -   Se quisermos analisar atributos específicos, podemos usar as funções do pacote [**dplyr**]{.dstq}.
+
+        -   [**select:**]{.dstq} para escolher colunas ou variáveis.
+
+        -   [**filter:**]{.dstq} para escolher linhas ou observações.
+
+        -   [**arrange:**]{.dstq} para ordendar linhas.
+
+        -   [**mutate:**]{.dstq} para moficiar variáveis.
+
+        -   [**summarize:**]{.dstq} para agregar linhas.
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3"
+#| output-location: fragment
+#| code-overflow: wrap
+
+library(tidyverse)
+veiculos <- read_csv(file = 'vehicles.csv', col_types = "nnnfnfffffnn")
+glimpse(veiculos)
+```
+
+. . .
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| output-location: fragment
+
+summary(veiculos)
+```
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(class) %>%
+  table()
+```
+
+. . .
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(class) %>%
+  table() %>%
+  prop.table()
+```
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  filter(drive == "2-Wheel Drive") %>%
+  select(co2emissions) %>%
+  summary()
+```
+
+# Visualizando os dados
+
+## Visualizando os dados
+
+-   Mesmo após o uso de técnicas estatísticas sofisticadas, certos padrões só são compreendidos quando representados por meio de uma visualização.
+
+-   Existem quatro objetivos principais que orientam o tipo de visualização de dados que usamos: comparação, relacionamento, distribuição e composição.
+
+### Comparação
+
+-   Uma visualização de comparação é usada para ilustrar a diferença entre dois ou mais itens em um determinado momento ou ao longo de um período de tempo.
+-   Um dos gráficos de comparação mais utilizados é o *box plot*. Algumas questões que ele nos ajuda responder são:
+    -   Existe algum atributo significativo?
+    -   As medidas de posição se alteram nos subgrupos?
+    -   Há variação nos dados de acordo com os subgrupos?
+    -   Existem *outliers* nos dados?
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-5"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  ggplot() +
+  geom_boxplot(mapping = aes(x = class, y = co2emissions), fill = "red") +
+  labs(title = "Boxplot da emissão de CO\u2082 por classe de veículo",
+       x = "Classe", y = "Emissão de C0\u2082")
+```
+
+## Relação
+
+-   Tipicamente usado em atributos contínuos para ilustrar a correlação entre duas ou mais variáveis.
+-   Uma das visualizações mais usadas é o gráfico de pontos. Ele é usado para responder questões como:
+    -   Há um tributo significativo?
+    -   Como os atributos interagem entre si?
+    -   Existem outliers nos dados?
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-4|1-6"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  ggplot() +
+  geom_point(mapping = aes(x = citympg, y = co2emissions),
+             color = "blue", size = 2) +
+  labs(title = "Gráfico de pontos de emissão de CO\u2082 vs. consumo em milhas por galão na cidade",
+       x = "Consumo em milhas por galão na cidade", y = "Emissão de CO\u2082")
+```
+
+## Distribuição
+
+-   As visualizações de distribuição mostram a distribuição estatística dos valores de um atributo.
+-   Uma das visualizações mais usadas é o histrograma, que permite mostrar a dispersão e a assimetria de um atributo.
+-   Algumas perguntas que o histograma ajuda a responder são:
+    -   De qual distribuição populacional os dados são oriundos?
+    -   Onde os dados estão localizados?
+    -   Quão dispersos estão os dados?
+    -   Os dados são simétrios?
+    -   Há *outliers*?
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-4|1-6"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  ggplot() +
+  geom_histogram(mapping = aes(x = co2emissions),
+                 bins = 30, fill = "yellow", color = "black") +
+  labs(title = "Histograma das emissões de CO\u2082",
+       x = "Emissões de CO\u2082", y = "Frequência")
+```
+
+## Composição
+
+-   Uma visualização de composição mostra a composição dos componentes dos dados.
+-   Gráficos de barras empilhadas e gráficos de pizza (ou setores) são duas das visualizações de composição mais comumente usadas.
+-   Com um gráfico de barras empilhadas, é possível mostrar como um valor total pode ser dividido em partes ou destacar a importância de cada parte em relação ao valor total. Ele ajuda a responder pergutnas como:
+    -   Como as distribuições variam dentro dos subgrupos?
+    -   Qual é a mudança relativa na composição ao longo do tempo?
+    -   Quanto um subgrupo contribui para o total?
+
+## Exemplo
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-4|1-6"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  ggplot() +
+  geom_bar(mapping = aes(x =year, fill = drive), color = "black") +
+  labs(title = "Gráfico de barras empilhadas da composição por tipo de direção por ano",
+       x = "Ano do modelo", y = "Numero de Carros") +
+  coord_flip()
+```
+
+# Preparação dos dados
+
+## Preparação dos dados
+
+-   Antes do processo de modelagem, precisamos ter certeza de que os dados são adequados ao método de aprendizado de máquina que vamos utilizar.
+-   A preparação dos dados envolve resolver problemas como dados ausentes, dados ruidosos, dados atípicos e desbalanceamento de uma classe.
+-   Também envolve a redução dos dados ou a modificação da estrutura dos dados para torná-los mais fáceis de trabalhar.
+
+## Limpeza dos dados
+
+-   Dados de entrada incorretos ou de baixa qualidade resultam inevitavelmente em saídas incorretas ou de baixa qualidade.
+-   Se não for tomado o devido cuidado no início para lidar adequadamente com questões de qualidade de dados antes de treinar um modelo, a saída do modelo será não confiável, enganadora ou simplesmente incorreta.
+
+## Limpeza dos dados
+
+### Valores ausentes (*missing values*)
+
+-   Existem alguns fatores que podem gerar valores ausentes nos conjuntos de dados: mudança no método de coleta, erro humano, combinação de vários conjuntos de dados, viés humano, entre outros.
+
+Formas de contornar o problema de valores ausentes:
+
+1.  [Remover todas as instâncias com valores faltantes]{.dstq}.
+    -   Essa abordagem pode resultar em perda valiosa de informações e padrões úteis no processo de aprendizagem de máquina.
+    -   Deve ser usada apenas quando o impacto de remover instâncias com valores ausentes é relativamente pequeno;
+    -   ou último recurso quando outras abordagens são inviáveis ou todas já foram esgotadas.
+
+## Limpeza dos dados
+
+### Valores ausentes (*missing values*)
+
+Formas de contornar o problema de valores ausentes:
+
+2.  [Usar uma valor que indique informação ausente]{.dstq}.
+    -   Em geral usa-se *N/A*, *"valor desconhecido"* ou *-1* para representar valores ausentes.
+    -   Essa abordagem geralmente é aceitável ao lidar com características categóricas não ordenadas.
+    -   No entanto, se usada em características contínuas, pode ser confundida com dados reais e levar a suposições incorretas sobre os dados.
+
+## Limpeza dos dados
+
+### Valores ausentes (*missing values*)
+
+Formas de contornar o problema de valores ausentes:
+
+3.  [Usar *imputação*]{.dstq}.
+    -   Imputação consistem em preencher dados ausentes usando os valores substitutos mais prováveis.
+    -   Algumas abordagens são:
+        -   Imputação aleatória
+        -   Imputação baseada em correspondência
+        -   Imputação baseada na distribuição
+        -   Imputação preditiva
+        -   Imputação da média ou mediana
+
+## Limpeza dos dados
+
+#### Imputação aleatória
+
+-   Essa abordagem usa um valor observado selecionado aleatoriamente como substituto para um valor ausente.
+    -   Vantagem: abordagem simples.
+    -   Desvantagem: ignora informações úteis ou padrões nos dados durante a seleção de valores substitutos.
+
+#### Imputação baseada em correspondência
+
+-   Substitui valores ausentes por valores de instâncias semelhantes com dados completos. Ela pode ser de dois tipos:
+    -   **hot-deck:** valores ausentes são substituídos por valores de instâncias semelhantes pertencentes ao mesmo conjunto de dados.
+    -   **cold-deck:** valores substitutos são obtidos a partir de um conjunto de dados separado.
+
+## Limpeza dos dados
+
+#### Imputação baseada na distribuição
+
+-   O valor ausente do atributo é substituído com base na distribuiçao de probabilidade dos valores observados para o atributo.
+-   Essa abordagem é comum em valores categóricos, usando a moda como substituto para valores ausentes.
+
+#### Imputação preditiva
+
+-   Usa um modelo preditivo para prever os valores ausentes, considerando a característica ausente como variável dependente e outras características como variáveis independentes.
+-   Essa abordagem requer treinamento de modelo e deve ser usada apenas quando necessário, pois outras abordagens de imputação geralmente são suficientes.
+
+## Limpeza dos dados
+
+#### Imputação da média ou mediana
+
+-   Para atributos contínuos, essa é a abordagem mais comum.
+-   A média ou a mediana dos valores observados é usada como substituta para o valor ausente.
+
+## Exemplo de substituição de NAs usando a média e a mediana
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(citympg, displacement, highwaympg) %>%
+  summary()
+```
+
+. . .
+
+Como as médias e medianas não são muito diferentes, vamos fazer os dois tipos de substituição.
+
+. . .
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4|1-5|1-6"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos <- veiculos %>%
+  mutate(citympg = ifelse(is.na(citympg), median(citympg, na.rm = TRUE), citympg)) %>%
+  mutate(highwaympg = ifelse(is.na(highwaympg), median(highwaympg, na.rm = TRUE), highwaympg)) %>%
+  mutate(displacement = ifelse(is.na(displacement), mean(displacement, na.rm = TRUE), displacement)) 
+```
+
+## Exemplo de substituição de NAs usando a média e a mediana
+
+Vamos dar mais uma olhada em nas estatísticas descritivas para garantir que não temos mais valores ausentes em nosso conjunto de dados.
+
+. . .
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(citympg, displacement, highwaympg) %>%
+  summary()
+```
+
+## Limpeza dos dados
+
+### Ruído (*noise*)
+
+-   O ruído representa a variação aleatória nos dados e pode ser introduzido durante a coleta e o processamento dos dados.
+-   É importante que os algoritmos de aprendizado de máquina possam lidar com o ruído, minimizando seu impacto em vez de tentar removê-lo.
+-   Se o ruído for um problema para o método, podemos usar algum método de suavização:
+    -   suavização com médias de intervalos;
+    -   suavização com limites de intervalos;
+    -   suavização por agrupamento;
+    -   suavização por regressão.
+
+## Limpeza dos dados
+
+#### Suavização com médias de intervalos
+
+-   Envolve a divisão dos dados em intervalos e a substituição dos valores em cada intervalo pela média desses valores.
+-   O número de intervalos é determinado pelo usuário, e a escolha afeta a quantidade de redução de ruído: mais intervalos reduzem o ruído menos, enquanto menos intervalos reduzem o ruído mais.
+-   Como exemplo, em um conjunto de dados ordenados, ao dividir em três intervalos, substituímos os valores em cada intervalo pela média do intervalo, resultando em uma versão suavizada dos dados.
+-   Exemplo: $$ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 $$ $$ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} $$ $$ \color{blue}{9, 9, 9, 9}, 23, 23, 23, 23, \color{red}{29, 29, 29, 29} $$
+
+## Limpeza dos dados
+
+#### Suavização com limites de intervalos
+
+-   Os valores são separados em intervalos e substituídos por um dos limites do intervalo (aquele que estiver mais pŕoximo).
+-   Exemplo: $$ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 $$ $$ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} $$ $$ \color{blue}{4, 4, 4, 15}, 21, 21, 25, 25, \color{red}{26, 26, 26, 34} $$
+
+## Limpeza dos dados
+
+#### Suavização por agrupamento (clustering)
+
+-   Esta abordagem usa a suavização pelo método não supervisionado de agrupamento ou clusterização.
+-   As instâncias dos dados são agrupados em um número de clusters definidos pelo usuário. Então a média de cada cluster substitui cada instância de acordo com o cluster ao qual pertence.
+
+![](images/cluster.png){fig-align="center" width="15cm"}
+
+## Limpeza dos dados
+
+#### Suavização por regressão
+
+-   A ideia é ajustar um modelo de regressão linear para a variável a ser suavizada e substituir seus valores pelos ajustados pelo modelo.
+
+## Limpeza dos dados
+
+#### Outliers
+
+-   *Outlier* é um valor significativamente diferente das outras observações no onjunto de dados.
+-   Uma vez identiicado um *outlier*, devemos passar um tempo entendendo porque eles existem nos dados e se são úteis (depende do problema de aprendizado).
+-   Algumas vezes os outliers são dados ruins (mal registrados) e devem ser removidos. Caso contrário, devem ser mantidos.
+-   Modelos como regressão linear são sensíveis a outliers. Se os outliers tiverem que ser mantidos nos dados, é melhor usar uma árvore de decisão.
+
+## Limpeza dos dados
+
+### Desbalanceamanto de classe
+
+-   Em problemas de classificação, quanto mais exemplos de treinamento o algoritmo recebe, melhor é sua capacidade de atribuir rótulos aos novos dados.
+-   Quando uma das classes possui muito mais observações que a outra, isso desequilibra a capacidade do modelo de aprender e fazer previsões precisas.
+-   Isso pode levar a resultados tendenciosos, onde o modelo tem um bom desempenho para a classe majoritária, mas não consegue prever com precisão a classe minoritária.
+-   Outro problema é que o aprendizado com dadso desbalanceados pode resultar em modelos com precisão preditiva enganosamente otimista (mais fáci clssificar todo mundo em uma classe, já que poucas observações pertencem à outra).
+
+## Limpeza dos dados
+
+### Desbalanceamanto de classe
+
+Métodos para resulver o problema:
+
+-   **Coletar mais dados** para minimizar o desbalanceamento.
+-   **Mudar a métrica de desempenho:** utilizar medidas como *precisão*, *recall*, *kappa* e a *curva ROC* em vez de depender unicamente da acurácia (precisão).
+-   **Tentar um algoritmo diferente:** considere a utilização de algoritmos como árvores de decisão e florestas aleatórias, que lidam bem com o desbalanceamento de classes em problemas de machine learning.
+-   **Reamostragem dos dados:** subamostrar a classe majoritária (*under-sampling*) ou a superamostrar da classe minoritária (*over-sampling*), inclusive com a geração de exemplos sintéticos, como feito pelo algoritmo *Synthetic Minority Over-sampling Technique* (SMOTE).
+
+# Transformação dos dados
+
+## Transformação dos dados
+
+-   Frequentemente é preciso modificar a estrutura ou características dos dados para atender às necessidades da aprendizagem de máquina.
+-   Algumass técnicas usadas são:
+    -   Normalização;
+    -   Discretização;
+    -   Codificação de variáveis *dummy*.
+
+## Transformação dos dados
+
+### Normalização
+
+-   O objetivo da *normalização* ou *padronização* é garantir que os valores de uma variável estejam dentro de uma faixa específica.
+-   As abordagens mais comuns são:
+    -   Escalonamento decimal;
+    -   Normalização Z-score;
+    -   Normalização Min-Max;
+    -   Transformação logarítmica.
+
+## Transformação dos dados
+
+### Normalização
+
+#### Escalonamento decimal
+
+-   Consiste em dividir os valores originais por um múltiplo de 10 de forma que o valor absoluto máximo do conjunto de dados seja menor ou igual a 1.
+-   Matematicamente, temos: $$ v' = \frac{v}{10^j},$$ em que $v'$ é a variável normalizada, $v$ é a variável original e $j$ é o menor inteiro tal que $\max\left(|v'|\right)\leq 1$.
+-   Exemplo: Para usar a normalização decimal em {12000, 24000,30000, 40000, 98000}, dividimos por $10^5$. A variável normalizada fica {0.120, 0.240, 0.300, 0.400, 0.980}.
+
+
+## Transformação dos dados
+### Normalização
+#### Escalonamento decimal
+
+:::: {.columns}
+
+::: {.column width="40%" .fragment}
+- Exemplo:
+  ```{r}
+  #| warning: false
+  #| echo: true
+  #| output: true
+  #| code-line-numbers: "1|1-2|1-3"
+  #| output-location: fragment
+  #| code-overflow: wrap
+
+  veiculos %>%
+    select(co2emissions) %>%
+    summary()
+  ```
+:::
+
+::: {.column width="60%" .fragment}
+- Como o maior valo é 1269.6, vamos dividir por $10^4$
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(co2emissions) %>%
+  mutate(co2emissions_d = co2emissions / (10^4)) %>%
+  summary()
+```
+:::
+
+::::
+
+
+## Transformação dos dados
+### Normalização
+#### Normalização Z-score
+
+- Conhecida como *normalização z-score* ou *normalização de média zero*.
+- Esta abordagem resulta em valores com média 0 e variância 1.
+- A variável normalizada $v'$ é dada por
+$$ v' = \frac{v-\overline{v}}{\sigma_v}, $$
+em que $v$ é a variável original, $\overline{v}$ é a média da variável $v$ e $\sigma_v$ é o desvio padrão da variável $v$.
+
+
+## Transformação dos dados
+### Normalização
+#### Normalização Z-score
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(co2emissions) %>%
+  mutate(co2emissions_z = (co2emissions - mean(co2emissions)) / sd(co2emissions)) %>%
+  summarise(Media = mean(co2emissions_z), desv.pad = sd(co2emissions_z))
+```
+
+
+## Transformação dos dados
+### Normalização
+#### Normalização Min-Max
+
+- Os dados originais são trasnformados para um novo intervalo definido pelos limites inferior e superior especificados pelo usuário, frequentemente 0 e 1.
+- Matematicamente, temos
+$$ v' = \frac{v-min_v}{max_v - min_v}\times (L_{sup} -L_{inf}) + L_{inf}, $$
+em que $min_v$ e $max_v$ são, respectivamente, o menor e o maior valor observado em $v$ e $L_{inf}$ e $L_{sup}$ são, resepctivamente, os limites inferior e superior do intervalo definido pelo usuário.
+
+
+## Transformação dos dados
+### Normalização
+#### Normalização Min-Max
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-4|1-5"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(co2emissions) %>%
+  mutate(co2emissions_n = ((co2emissions - min(co2emissions)) / (max(co2emissions) - min(co2emissions))) *
+           (1 - 0) + 0) %>%
+  summary()
+```
+
+
+## Transformação dos dados
+### Normalização
+#### Transformação logarítmica
+
+- As transformações anteriores são boas quandoos dados são simétricos.
+- A transformação logarítmica é mais adequada para distribuições assimétricas e dados com valores que variam amplamente em magnitude.
+- A transformação é
+
+$$ v' = \log(v). $$
+
+:::{.fragment}
+
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos %>%
+  select(co2emissions) %>%
+  mutate(co2emissions_log = log10(co2emissions)) %>%
+  summary()
+```
+:::
+
+
+## Transformação dos dados
+### Discretização
+
+- A *discretização* consiste em transformar variáveis contínuas em categóricas.
+- Alguns algoritmos exigem que a variável independente seja binária ou tenha um número limitado de valores distintos.
+- Esse processo pode ser feito usando a suavização com médias de intervalo ou suavização com limites de intervalo.
+- Outra forma comum é a *dicotomização*.
+  - Exemplo: Os valores $\{4,8, 9,15, 21, 21, 24, 25, 26, 28, 29,34\}$ seriam dicotomizados usado 20 como valore de corte, ficando $\{0, 0, 0, 0,1,1,1,1,1,1,1,1\}$.
+
+
+## Transformação dos dados
+### Variáveis dummy
+
+- Uma variável *dummy* é uma dicotomização de uma variável contínua.
+- Ela é muito usada em algoritmos que exigem que os atributos independentes sejam numericos (como regressão ou k-NN) e como uma forma de representar dados ausentes.
+- Suponha que temos a variável abaixo:
+
+|Drive                    | Código |
+|:------------------------|:------:|
+|*Front-Wheel Drive*      | 1      |
+|*Rear-Wheel Drive*       | 2      |
+|*All-Wheel Drive*        | 3      |
+
+
+## Transformação dos dados
+### Variáveis dummy
+
+- Usando uma variável dummy completa, temos:
+
+|Drive                    | Front-Wheel Drive |Rear-Wheel Drive|
+|:------------------------|:-----------------:|:--------------:|
+|*Front-Wheel Drive*      | 1                 | 0              |
+|*Rear-Wheel Drive*       | 0                 | 1              |
+|*All-Wheel Drive*        | 0                 | 0              |
+
+- Agora, ao invés de uma variável, temos $2$ variáveis *dummies*.
+- Em geral, o número de variáveis *dummies* criadas é $n-1$, em que $n$ é o número de categorias da variável original.
+- Em geral, a categoria que não virou *dummy* é porque ela é, de alguma forma, menos importante para o estudo.
+
+
+## Transformação dos dados
+### Variáveis dummy
+
+:::{.fragment}
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-2|1-3|1-4|1-5"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos2 <- veiculos %>%
+  mutate(drive2 = recode(drive, "2-Wheel Drive" = "Front-Wheel Drive")) %>%
+  mutate(drive2 = recode(drive2, "4-Wheel Drive" = "All-Wheel Drive")) %>%
+  select(drive, drive2)
+summary(veiculos2)
+```
+:::
+
+:::{.fragment}
+```{r}
+#| warning: false
+#| echo: true
+#| output: true
+#| code-line-numbers: "1|1-3|1-4"
+#| output-location: fragment
+#| code-overflow: wrap
+
+veiculos2 <- data.frame(veiculos2)
+
+veiculos2 <- fastDummies::dummy_cols(veiculos2, select_columns = "drive2")
+head(veiculos2)
+```
+:::
+
+# Redução dos dados
+
+## Redução dos dados
+
+- Às vezes precisamos reduzir o número de observações, o número de variáveis, ou ambos, antes de prosseguir com o processo de aprendizado de máquina.
+- Algumas abordagen apra redução dos dados são:
+  - Amostragem;
+  - Redução da dimensionalidade.
+
+
+## Redução dos dados
+### Amostragem
+
+- No aprendizado de máquina supervisionado, a amostragem é usada como meio de gerar nossos conjuntos de treinamento e teste.
+
+
+
+
+
+
+
+# Fim {style="text-align: center;"}
+
+![](images/carreta-furacao.gif){fig-align="center"}

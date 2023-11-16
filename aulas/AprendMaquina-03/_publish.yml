@@ -1,0 +1,4 @@
+- source: slides-02.qmd
+  quarto-pub:
+    - id: 7d0ec52f-2718-4ccb-8eb1-46e21f8df225
+      url: 'https://sadraquelucena.quarto.pub/tratando-os-dados'
