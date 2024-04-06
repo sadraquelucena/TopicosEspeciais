@@ -1,0 +1,41 @@
+envelope.normal<-function(form=form,k=k,alfa=alfa){
+alfa1<-ceiling(k*alfa)
+alfa2<-ceiling(k*(1-alfa))
+glm1<-lm(formula=form)
+X<-model.matrix(glm1)
+n<-nrow(X)  
+p<-ncol(X)
+H<-X%*%solve(t(X)%*%X)%*%t(X)
+h<-diag(H)
+lmi<-lm.influence(glm1)
+si<-lmi$sigma
+rp<-residuals(glm1)
+ts<-rp/(si*(1-h)^0.5)
+ident<-diag(n)  
+epsilon<-matrix(0,n,k)  
+e<-matrix(0,n,k)  
+e1<-numeric(n)  
+e2<-numeric(n)  
+for(i in 1:k){  
+      epsilon[,i]<-rnorm(n,0,1)  
+      e[,i]<-(ident-H)%*%epsilon[,i]  
+      u<-diag(ident-H)  
+      e[,i]<-e[,i]/(u^0.5) 
+      e[,i]<-sort(e[,i])  
+               }  
+for(i in 1:n){  
+          eo<-sort(e[i,])  
+          e1[i]<-eo[alfa1]  
+          e2[i]<-eo[alfa2]  
+             }  
+xb<-apply(e,1,mean)
+faixa<-range(ts,e1,e2)
+par(pty="s")
+qqnorm(e1,axes=F,xlab="",ylab="",type="l",ylim=faixa,lty=1)
+par(new=TRUE)
+qqnorm(e2,axes=F,xlab="",ylab="",type="l",ylim=faixa,lty=1)
+par(new=TRUE)
+qqnorm(xb,axes=F,xlab="",ylab="",type="l",ylim=faixa,lty=2)
+par(new=TRUE)
+qqnorm(ts,xlab="Percentis da N(0,1)",ylab="Residuo Studentizado",ylim=faixa)
+}

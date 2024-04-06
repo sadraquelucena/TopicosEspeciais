@@ -1,0 +1,58 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{PlanoEnsinoDECAT}
+
+\usepackage[dvips]{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{booktabs} % para linhas na tabela colorida
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+
+\usepackage{setspace} % espaçamento
+
+%\def\codigo#1{\gdef\@codigo{#1}}
+\def\codigo#1{\gdef\@codigo{\begin{tabular}[c]{@{}l@{}}#1\end{tabular}}}
+%\def\disciplina#1{\gdef\@disciplina{#1}}
+\def\disciplina#1{\gdef\@disciplina{\begin{tabular}[c]{@{}l@{}}#1\end{tabular}}}
+\def\docente#1{\gdef\@docente{#1}}
+\def\periodo#1{\gdef\@periodo{#1}}
+\def\qtdaval#1{\gdef\@qtdaval{#1}}
+\def\horario#1{\gdef\@horario{#1}}
+\def\horarioo#1{\gdef\@horarioo{#1}}
+\def\cargahoraria#1{\gdef\@cargahoraria{#1}}
+\def\creditos#1{\gdef\@creditos{#1}}
+
+
+
+\newcommand\cabecalho{%
+	\begin{minipage}[b]{0.1 \linewidth}
+	     \includegraphics[width=1.25cm]{ufs_vertical_positiva.png}
+	     \vspace{.2cm}
+	\end{minipage}\hfill	
+	\begin{minipage}[b]{0.85 \linewidth}
+	     %\vspace{-1cm}
+	     {\large U}NIVERSIDADE {\large F}EDERAL DE {\large S}ERGIPE\\
+		 {\large C}ENTRO DE {\large C}I\^ENCIAS {\large E}XATAS E {\large T}ECNOLOGIA\\
+		 {\large D}EPARTAMENTO DE {\large E}STAT\'ISTICA E {\large C}I\^ENCIAS {\large A}TUARIAIS\\
+	\end{minipage}
+
+	\vspace{.7cm}
+	\onehalfspacing
+	
+	\begin{table*}[h!]
+	\rowcolors{1}{gray!20}{gray!20}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|lp{3.5cm}p{4.7cm}p{1.8cm}|}
+		\hline
+		\textbf{Componente Curricular}: & \multicolumn{3}{l|}{\@codigo ~\textemdash\ \@disciplina}\\
+		\textbf{Carga hor\'aria:} & \@cargahoraria ~(\@creditos) & \multicolumn{2}{l|}{\textbf{Hor\'ario:} \quad \@horario}\\
+		 & & \multicolumn{2}{l|}{\qquad\qquad\quad ~\@horarioo}\\
+		\textbf{Unidade Respons\'avel:} & \multicolumn{3}{l|}{Departamento de Estat\'istica e Ci\^encias Atuariais}\\
+		\textbf{Docente:} & \multicolumn{3}{l|}{\@docente}\\
+		\textbf{Tipo de Componente:} & Disciplina & \textbf{Quantidade de Avalia\c{c}\~oes:} & \@qtdaval\\
+		\textbf{Per\'iodo Letivo:} & \multicolumn{3}{l|}{\@periodo}\\
+		\hline
+	\end{tabular}
+	\end{table*}
+}
+
+\endinput

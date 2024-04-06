@@ -1,0 +1,179 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage{PlanoEnsinoDECAT}
+\usepackage[brazil]{babel}
+\usepackage{color}
+\usepackage[latin1]{inputenc}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+
+\usepackage[table]{xcolor}
+\usepackage{booktabs} % para linhas na tabela colorida
+
+\usepackage[
+top    = 2.50cm,
+bottom = 2.50cm,
+left   = 2.60cm,
+right  = 2.50cm]{geometry}
+
+\usepackage{caption}
+\captionsetup[table]{name=Quadro}
+
+\usepackage{palatino} % fonte
+\usepackage{setspace} % espaçamento
+
+
+\codigo{ESTAT0016}                      % codigo da disciplina
+\disciplina{TOPICOS ESPECIAIS EM ESTATISTICA\\[-.2cm] (Introdução à aprendizgem de máquina)}  % nome da disciplina
+\docente{Sadraque E. F. Lucena}         % nome do(a) docente
+\cargahoraria{60 horas}                 % carga horaria da disciplina
+\creditos{4 cr\'editos}                 % quatidade de creditos da disciplina
+\horario{Segundas - 17h00 \`as 18h50}   % horario 1
+\horarioo{Quintas - 17h00 \`as 18h50}   % horario 2
+\periodo{2023-2}                        % periodo letivo
+\qtdaval{2}                             % quantidade de avaliacoes Ex.: 2
+
+\begin{document}
+
+\cabecalho
+
+\begin{itemize}[label={},itemindent=-2em,leftmargin=2em]
+    \item {\bf Ementa:} Pré-processamento de dados. Aprendizado supervisionado. Regressão. Classificação. $k$-Nearest Neighbors. Na\"ive Bayes. Árvores de Decisão. Florestas aleatórias. Avaliação de desempenho. Validação Cruzada. Métricas de desempenho de Classificação. Ajuste de parâmetros. Bagging, Boosting e Stacking. Aprendizado não supervisionado. Regras de Associação. $k$-means.
+    
+    \item {\bf Objetivos:}  Introduzir os conceitos fundamentais e técnicas da aprendizagem de máquina.
+    
+    \item {\bf Metodologia:} Serão ministradas aulas teóricas expositivas; utilizados recursos visuais e computacionais; aplicação dos métodos em sala de aula; solicitação de atividades extraclasse. O cronograma de aulas encontra-se no Quadro 1.
+    
+    \item {\bf Habilidades e Competências:} No final deste curso, os(as) alunos(as) deverão estar equipados(as) com as habilidades e o entendimento necessários para aplicar a aprendizagem de máquina em diversos contextos, preparando-os(as) para carreiras em ciência de dados, inteligência artificial e análise de dados.
+    
+    \item {\bf Avaliação:} Será realizada uma avaliação contínua, com solicitação de atividades extraclasse e apresentações em sala de aula. Duas avaliações também serão realizadas ao longo do semestre.
+\end{itemize}
+
+\noindent {\bf Conteúdo:}
+\begin{enumerate}
+	\singlespacing
+	\item Pré-processamento de Dados
+	\begin{enumerate}[label*=\arabic*.]
+		\item Exploração
+		\item Limpeza
+		\item Transformação
+		\item Redução
+	\end{enumerate}
+	\vspace{.3cm}
+	\item Aprendizado Supervisionado
+	\begin{enumerate}[label*=\arabic*.]
+		\item Regressão
+		\begin{enumerate}[label*=\arabic*.]
+			\item Regressão linear
+			\item Regressão logística
+		\end{enumerate}
+		\item $k$-Nearest Neighbors
+		\item Na\"ive Bayes
+		\item Árvores de Decisão
+		\item Florestas aleatórias
+		\item Avaliação de desempenho
+		\begin{enumerate}[label*=\arabic*.]
+			\item Validação Cruzada
+			\item Amostragem bootstrap
+			\item Acurácia
+			\item Kappa
+			\item Precisão e revocação
+			\item Sensibilidade e especificidade 
+		\end{enumerate}
+		\item Ajuste de parâmetros
+		\item Métodos de conjunto (ensemble methods)
+		\begin{enumerate}[label*=\arabic*.]
+			\item Bagging
+			\item Boosting
+			\item Stacking
+		\end{enumerate}
+	\end{enumerate}
+
+	\item Aprendizado Não Supervisionado
+	\begin{enumerate}[label*=\arabic*.]
+		\item Regras de Associação
+		\item $k$-means
+	\end{enumerate}
+\end{enumerate}
+
+\noindent {\bf Bibliografia:}\\
+
+\noindent {\it Básica:}
+\begin{itemize}
+     \item FACELI, Katti. \textbf{Inteligência artificial: uma abordagem de aprendizado de máquina}. Rio de Janeiro: LTC, 2011. 378 p.
+     
+     \item IZBICKI, Rafael; DOS SANTOS, Tiago Mendonça. \textbf{Aprendizado de máquina: uma abordagem estatística} [livro eletrônico]. São Carlos: Rafael Izbicki, 2020.
+     
+     \item NWANGANGA, Fred; CHAPPLE, Mike. \textbf{Practical machine learning in R}. Indianapolis: John Wiley \& Sons, 2020.
+     
+     \item ABU-MOSTAFA, Yaser S.; MAGDON-ISMAIL, Malik; LIN, Hsuan-Tien. \textbf{Learning from data}. New York: AMLBook, 2012.
+     
+     \item HASTIE, Trevor et al. \textbf{The elements of statistical learning: data mining, inference, and prediction}. New York: springer, 2009.
+\end{itemize}
+
+\noindent {\it Complementar:}
+\begin{itemize}
+    \item RAMASUBRAMANIAN, Karthik; SINGH, Abhishek. \textbf{Machine learning using R}. New Delhi, India: Apress, 2017.
+    
+    \item LANTZ, Brett. \textbf{Machine learning with R: expert techniques for predictive modeling}. Packt publishing ltd, 2019.
+\end{itemize}
+
+\newpage
+
+\pagenumbering{gobble}
+\begin{table}
+	\caption{Cronograma de aulas previstas para a componente curricular Tópicos Especiais em Estatística para o período 2023-2.}
+	\rowcolors{1}{gray!20}{white}
+	\renewcommand{\arraystretch}{1.15}
+	\begin{tabular}{|c|c|c|p{9cm}|}
+		\toprule
+		\textbf{Data}	&	\textbf{Dia da semana}	&	\textbf{Aula}	&	\textbf{Assunto Previsto}	\\
+		\midrule
+		13/11/23	&	Segunda	&	1	&	Apresentação da disciplina. \\
+		16/11/23	&	Quinta	&	2	&	Introdução ao Quarto.\\
+		20/11/23	&	Segunda	&	3	&	Tratando os dados.\\
+		23/11/23	&	Quinta	&	4	&	Tratando os dados.\\
+		27/11/23	&	Segunda	&	5	&	\textcolor{red}{IX SEMAC - Semana Acadêmico-Cultural da UFS}\\
+		30/11/23	&	Quinta	&	6	&	\textcolor{red}{IX SEMAC - Semana Acadêmico-Cultural da UFS}\\
+		04/12/23	&	Segunda	&	7	&	Regressão linear.\\
+		07/12/23	&	Quinta	&	8	&	Regressão linear.\\
+		11/12/23	&	Segunda	&	9	&	Regressão logística.\\
+		14/12/23	&	Quinta	&	10	&	Regressão logística.\\
+		18/12/23	&	Segunda	&	11	&	$k$-Nearest Neighbors.\\
+		21/12/23	&	Quinta	&	12	&	$k$-Nearest Neighbors.\\
+		25/12/23	&	Segunda	&	--	&	\textcolor{red}{Recesso natalino}\\
+		28/12/23	&	Quinta	&	--	&	\textcolor{red}{Recesso natalino}\\
+		01/01/24	&	Segunda	&	--	&	\textcolor{red}{Férias coletivas}\\
+		04/01/24	&	Quinta	&	--	&	\textcolor{red}{Férias coletivas}\\
+		08/01/24	&	Segunda	&	--	&	\textcolor{red}{Férias coletivas}\\
+		11/01/24	&	Quinta	&	--	&	\textcolor{red}{Férias coletivas}\\
+		15/01/24	&	Segunda	&	13	&	Naive Bayes.\\
+		18/01/24	&	Quinta	&	14	&	Naive Bayes.\\
+		22/01/24	&	Segunda	&	15	&	Avaliação 1.\\
+		25/01/24	&	Quinta	&	16	&	Árvores de decisão.\\
+		29/01/24	&	Segunda	&	17	&	Árvores de decisão.\\
+		01/02/24	&	Quinta	&	18	&	Floresta aleatória.\\
+		05/02/24	&	Segunda	&	19	&	Floresta aleatória.\\
+		08/02/24	&	Quinta	&	20	&	Avaliando a performance do modelo.\\
+		12/02/24	&	Segunda	&	--	&	\textcolor{red}{Carnaval (ponto facultativo)}\\
+		15/02/24	&	Quinta	&	21	&	Atividade.\\
+		19/02/24	&	Segunda	&	22	&	Avaliando a performance do modelo.\\
+		22/02/24	&	Quinta	&	23	&	Melhorando a performance dos modelos.\\
+		26/02/24	&	Segunda	&	24	&	Melhorando a performance dos modelos.\\
+		29/02/24	&	Quinta	&	25	&	Descoberta de padrões por regras de associação.\\
+		04/03/24	&	Segunda	&	26	&	Descoberta de padrões por regras de associação.\\
+		07/03/24	&	Quinta	&	27	&	Agrupamento de dados com $k$-Means.\\
+		11/03/24	&	Segunda	&	28	&	Agrupamento de dados com $k$-Means.\\
+		14/03/24	&	Quinta	&	29	&	Aplicações diversas.\\
+		18/03/24	&	Segunda	&	30	&	Projeto.\\
+		21/03/24	&	Quinta	&	31	&	Aplicações diversas.\\
+		25/03/24	&	Segunda	&	32	&	Aplicações diversas.\\
+		28/03/24	&	Quinta	&	--	&	\textcolor{red}{Quinta-feira Santa (ponto facultativo)}\\
+		01/04/24	&	Segunda	&	33	&	Primeira apresentação do projeto.\\
+		04/04/24	&	Quinta	&	34	&	Aplicações diversas.\\
+		08/04/24	&	Segunda	&	35	&	Apresentação do projeto.\\
+		11/04/24	&	Quinta	&	36	&	Encerramento.\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\end{document}

@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
+
+<title>STA 210 - Spring 2022 - Multinomial Logistic Regression (MultiLR)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta property="og:title" content="STA 210 - Spring 2022 - Multinomial Logistic Regression (MultiLR)">
+<meta property="og:description" content="STA 210 - Spring 2022">
+<meta property="og:image" content="https://sta210-s22.github.io/website/slides/lec-23_files/figure-revealjs/unnamed-chunk-5-1.png">
+<meta property="og:site-name" content="STA 210 - Spring 2022">
+<meta property="og:image:height" content="6674">
+<meta property="og:image:width" content="10800">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - Multinomial Logistic Regression (MultiLR)">
+<meta name="twitter:description" content="STA 210 - Spring 2022">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website/slides/images/twitter-card.png">
+<meta name="twitter:creator" content="@minebocek">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Multinomial Logistic Regression (MultiLR)</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/sta210-s22" rel="" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
+    <a href="https://cmgr.oit.duke.edu/containers" rel="" title="RStudio Containers" class="quarto-navigation-tool px-1" aria-label="RStudio Containers"><i class="bi bi-code-square"></i></a>
+    <div class="dropdown">
+      <a href="" title="Sakai" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Sakai"><i class="bi bi-person-fill"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">
+            Discussion forum
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889">
+            Gradescope
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/69078433-67a6-4054-a2e7-9e6c202ecdc3/">
+            Gradebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Course information</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-support.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-team.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching team</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-links.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful links</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Computing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../computing-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Access</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../computing-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-tips-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tips + resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Supplemental notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/slr-derivations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLR derivations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/model-diagnostics-matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model diagnostics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/mlr-matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MLR matrix notation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/log-transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Log transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/model-selection-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model selection criteria</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#computational-setup" id="toc-computational-setup" class="nav-link" data-scroll-target="#computational-setup">Computational setup</a></li>
+  </ul></li>
+  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models">Generalized Linear Models</a>
+  <ul class="collapse">
+  <li><a href="#generalized-linear-models-glms" id="toc-generalized-linear-models-glms" class="nav-link" data-scroll-target="#generalized-linear-models-glms">Generalized Linear Models (GLMs)</a></li>
+  <li><a href="#binary-outcome-logistic" id="toc-binary-outcome-logistic" class="nav-link" data-scroll-target="#binary-outcome-logistic">Binary outcome (Logistic)</a></li>
+  <li><a href="#binary-outcome-logistic-1" id="toc-binary-outcome-logistic-1" class="nav-link" data-scroll-target="#binary-outcome-logistic-1">Binary outcome (Logistic)</a></li>
+  <li><a href="#multinomial-outcome-variable" id="toc-multinomial-outcome-variable" class="nav-link" data-scroll-target="#multinomial-outcome-variable">Multinomial outcome variable</a></li>
+  <li><a href="#multinomial-logistic-regression" id="toc-multinomial-logistic-regression" class="nav-link" data-scroll-target="#multinomial-logistic-regression">Multinomial Logistic Regression</a></li>
+  <li><a href="#multinomial-logistic-regression-1" id="toc-multinomial-logistic-regression-1" class="nav-link" data-scroll-target="#multinomial-logistic-regression-1">Multinomial Logistic Regression</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#nhanes-data" id="toc-nhanes-data" class="nav-link" data-scroll-target="#nhanes-data">NHANES Data</a></li>
+  <li><a href="#nhanes-data-1" id="toc-nhanes-data-1" class="nav-link" data-scroll-target="#nhanes-data-1">NHANES Data</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#exploratory-data-analysis-1" id="toc-exploratory-data-analysis-1" class="nav-link" data-scroll-target="#exploratory-data-analysis-1">Exploratory data analysis</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-multinomial-logistic-regression" id="toc-fitting-a-multinomial-logistic-regression" class="nav-link" data-scroll-target="#fitting-a-multinomial-logistic-regression">Fitting a multinomial logistic regression</a>
+  <ul class="collapse">
+  <li><a href="#model-in-r" id="toc-model-in-r" class="nav-link" data-scroll-target="#model-in-r">Model in R</a></li>
+  <li><a href="#model-result" id="toc-model-result" class="nav-link" data-scroll-target="#model-result">Model result</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  <li><a href="#looking-inside-the-result-of-fit" id="toc-looking-inside-the-result-of-fit" class="nav-link" data-scroll-target="#looking-inside-the-result-of-fit">Looking inside the result of <code>fit()</code></a></li>
+  <li><a href="#repair-and-get-back-on-track" id="toc-repair-and-get-back-on-track" class="nav-link" data-scroll-target="#repair-and-get-back-on-track">Repair, and get back on track</a></li>
+  <li><a href="#model-output" id="toc-model-output" class="nav-link" data-scroll-target="#model-output">Model output</a></li>
+  <li><a href="#model-output-with-ci" id="toc-model-output-with-ci" class="nav-link" data-scroll-target="#model-output-with-ci">Model output, with CI</a></li>
+  <li><a href="#model-output-with-ci-1" id="toc-model-output-with-ci-1" class="nav-link" data-scroll-target="#model-output-with-ci-1">Model output, with CI</a></li>
+  <li><a href="#fair-vs.-excellent-health" id="toc-fair-vs.-excellent-health" class="nav-link" data-scroll-target="#fair-vs.-excellent-health">Fair vs.&nbsp;Excellent Health</a></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#interpretations-1" id="toc-interpretations-1" class="nav-link" data-scroll-target="#interpretations-1">Interpretations</a></li>
+  <li><a href="#hypothesis-test-for-beta_jk" id="toc-hypothesis-test-for-beta_jk" class="nav-link" data-scroll-target="#hypothesis-test-for-beta_jk">Hypothesis test for <span class="math inline">\(\beta_{jk}\)</span></a></li>
+  <li><a href="#confidence-interval-for-beta_jk" id="toc-confidence-interval-for-beta_jk" class="nav-link" data-scroll-target="#confidence-interval-for-beta_jk">Confidence interval for <span class="math inline">\(\beta_{jk}\)</span></a></li>
+  <li><a href="#interpreting-cis-for-beta_jk" id="toc-interpreting-cis-for-beta_jk" class="nav-link" data-scroll-target="#interpreting-cis-for-beta_jk">Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></a></li>
+  <li><a href="#interpreting-cis-for-beta_jk-1" id="toc-interpreting-cis-for-beta_jk-1" class="nav-link" data-scroll-target="#interpreting-cis-for-beta_jk-1">Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></a></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/slides/lec-23.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec-23.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multinomial Logistic Regression (MultiLR)</h1>
+<p class="subtitle lead">STA 210 - Spring 2022</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mine Çetinkaya-Rundel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="welcome" class="level1">
+<h1>Welcome</h1>
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<div class="nonincremental">
+<ul>
+<li><p>Introduce multinomial logistic regression</p></li>
+<li><p>Interpret model coefficients</p></li>
+<li><p>Inference for a coefficient <span class="math inline">\(\beta_{jk}\)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="computational-setup" class="level2">
+<h2 class="anchored" data-anchor-id="computational-setup">Computational setup</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="generalized-linear-models" class="level1">
+<h1>Generalized Linear Models</h1>
+<section id="generalized-linear-models-glms" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="generalized-linear-models-glms">Generalized Linear Models (GLMs)</h2>
+<ul>
+<li><p>In practice, there are many different types of outcome variables:</p>
+<div class="nonincremental">
+<ul>
+<li><strong>Binary</strong>: Win or Lose</li>
+<li><strong>Nominal</strong>: Democrat, Republican or Third Party candidate</li>
+<li><strong>Ordered</strong>: Movie rating (1 - 5 stars)</li>
+<li>and others…</li>
+</ul>
+</div></li>
+<li><p>Predicting each of these outcomes requires a <strong>generalized linear model</strong>, a broader class of models that <em>generalize</em> the multiple linear regression model</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recommended reading for more details about GLMs: <a href="https://bookdown.org/roback/bookdown-bysh/ch-glms.html"><em>Generalized Linear Models: A Unifying Theory</em></a>.</p>
+</div>
+</div>
+</section>
+<section id="binary-outcome-logistic" class="level2">
+<h2 class="anchored" data-anchor-id="binary-outcome-logistic">Binary outcome (Logistic)</h2>
+<ul>
+<li><p>Given <span class="math inline">\(P(y_i=1|x_i)= \hat{\pi}_i\hspace{5mm} \text{ and } \hspace{5mm}P(y_i=0|x_i) = 1-\hat{\pi}_i\)</span></p>
+<p><span class="math display">\[
+\log\Big(\frac{\hat{\pi}_i}{1-\hat{\pi}_i}\Big) = \hat{\beta}_0 + \hat{\beta}_1 x_{i}
+\]</span></p></li>
+<li><p>We can calculate <span class="math inline">\(\hat{\pi}_i\)</span> by solving the logit equation:</p>
+<p><span class="math display">\[
+\hat{\pi}_i = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 x_{i}}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 x_{i}}}
+\]</span></p></li>
+</ul>
+</section>
+<section id="binary-outcome-logistic-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="binary-outcome-logistic-1">Binary outcome (Logistic)</h2>
+<ul>
+<li><p>Suppose we consider <span class="math inline">\(y=0\)</span> the <strong>baseline category</strong> such that</p>
+<p><span class="math display">\[
+P(y_i=1|x_i) = \hat{\pi}_{i1} \hspace{2mm}  \text{ and } \hspace{2mm} P(y_i=0|x_i) = \hat{\pi}_{i0}
+\]</span></p></li>
+<li><p>Then the logistic regression model is</p>
+<p><span class="math display">\[
+\log\bigg(\frac{\hat{\pi}_{i1}}{1- \hat{\pi}_{i1}}\bigg) = \log\bigg(\frac{\hat{\pi}_{i1}}{\hat{\pi}_{i0}}\bigg) = \hat{\beta}_0 + \hat{\beta}_1 x_i
+\]</span></p></li>
+<li><p>Slope, <span class="math inline">\(\hat{\beta}_1\)</span>: When <span class="math inline">\(x\)</span> increases by one unit, the odds of <span class="math inline">\(y=1\)</span> versus the baseline <span class="math inline">\(y=0\)</span> are expected to multiply by a factor of <span class="math inline">\(e^{\hat{\beta}_1}\)</span></p></li>
+<li><p>Intercept, <span class="math inline">\(\hat{\beta}_0\)</span>: When <span class="math inline">\(x=0\)</span>, the predicted odds of <span class="math inline">\(y=1\)</span> versus the baseline <span class="math inline">\(y=0\)</span> are <span class="math inline">\(\exp\{\hat{\beta}_0\}\)</span></p></li>
+</ul>
+</section>
+<section id="multinomial-outcome-variable" class="level2">
+<h2 class="anchored" data-anchor-id="multinomial-outcome-variable">Multinomial outcome variable</h2>
+<ul>
+<li><p>Suppose the outcome variable <span class="math inline">\(y\)</span> is categorical and can take values <span class="math inline">\(1, 2, \ldots, K\)</span> such that <span class="math inline">\((K &gt; 2)\)</span></p></li>
+<li><p><strong>Multinomial Distribution:</strong></p>
+<p><span class="math display">\[
+P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K
+\]</span></p>
+<p>such that <span class="math inline">\(\sum\limits_{k=1}^{K} \pi_k = 1\)</span></p></li>
+</ul>
+</section>
+<section id="multinomial-logistic-regression" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="multinomial-logistic-regression">Multinomial Logistic Regression</h2>
+<ul>
+<li><p>If we have an explanatory variable <span class="math inline">\(x\)</span>, then we want to fit a model such that <span class="math inline">\(P(y = k) = \pi_k\)</span> is a function of <span class="math inline">\(x\)</span></p></li>
+<li><p>Choose a baseline category. Let’s choose <span class="math inline">\(y=1\)</span>. Then,</p>
+<p><span class="math display">\[
+\log\bigg(\frac{\pi_{ik}}{\pi_{i1}}\bigg) = \beta_{0k} + \beta_{1k} x_i
+\]</span></p></li>
+<li><p>In the multinomial logistic model, we have a separate equation for each category of the outcome relative to the baseline category</p>
+<ul>
+<li>If the outcome has <span class="math inline">\(K\)</span> possible categories, there will be <span class="math inline">\(K-1\)</span> equations as part of the multinomial logistic model</li>
+</ul></li>
+</ul>
+</section>
+<section id="multinomial-logistic-regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="multinomial-logistic-regression-1">Multinomial Logistic Regression</h2>
+<ul>
+<li><p>Suppose we have a outcome variable <span class="math inline">\(y\)</span> that can take three possible outcomes that are coded as “A”, “B”, “C”</p></li>
+<li><p>Let “A” be the baseline category. Then</p>
+<p><span class="math display">\[
+\log\bigg(\frac{\pi_{iB}}{\pi_{iA}}\bigg) = \beta_{0B} + \beta_{1B}x_i \\[10pt]
+\log\bigg(\frac{\pi_{iC}}{\pi_{iA}}\bigg) = \beta_{0C} + \beta_{1C} x_i
+\]</span></p></li>
+</ul>
+</section>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<section id="nhanes-data" class="level2">
+<h2 class="anchored" data-anchor-id="nhanes-data">NHANES Data</h2>
+<ul>
+<li><p><a href="https://www.cdc.gov/nchs/nhanes/index.htm">National Health and Nutrition Examination Survey</a> is conducted by the National Center for Health Statistics (NCHS)</p></li>
+<li><p>The goal is to <em>“assess the health and nutritional status of adults and children in the United States”</em></p></li>
+<li><p>This survey includes an interview and a physical examination</p></li>
+</ul>
+</section>
+<section id="nhanes-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="nhanes-data-1">NHANES Data</h2>
+<ul>
+<li><p>We will use the data from the <code>NHANES</code> R package</p></li>
+<li><p>Contains 75 variables for the 2009 - 2010 and 2011 - 2012 sample years</p></li>
+<li><p>The data in this package is modified for educational purposes and should <strong>not</strong> be used for research</p></li>
+<li><p>Original data can be obtained from the <a href="https://www.cdc.gov/nchs/data_access/index.htm">NCHS website</a> for research purposes</p></li>
+<li><p>Type <code>?NHANES</code> in console to see list of variables and definitions</p></li>
+</ul>
+</section>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p><strong>Goal:</strong> Use a person’s age and whether they do regular physical activity to predict their self-reported health rating.</p>
+<ul>
+<li><p>Outcome: <code>HealthGen</code>: Self-reported rating of participant’s health in general. Excellent, Vgood, Good, Fair, or Poor.</p></li>
+<li><p>Predictors:</p>
+<ul>
+<li><code>Age</code>:Age at time of screening (in years). Participants 80 or older were recorded as 80.</li>
+<li><code>PhysActive</code>: Participant does moderate to vigorous-intensity sports, fitness or recreational activities.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nhanes_adult <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(HealthGen, Age, PhysActive) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">obs_num =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>. . .</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Rows: 6,710
+Columns: 4
+$ HealthGen  &lt;fct&gt; Good, Good, Good, Good, Vgood, Vgood, Vgood, Vgood, Vgood, …
+$ Age        &lt;int&gt; 34, 34, 34, 49, 45, 45, 45, 66, 58, 54, 50, 33, 60, 56, 56,…
+$ PhysActive &lt;fct&gt; No, No, No, No, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, No, …
+$ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-23_files/figure-revealjs/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-1">Exploratory data analysis</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-23_files/figure-revealjs/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-a-multinomial-logistic-regression" class="level1">
+<h1>Fitting a multinomial logistic regression</h1>
+<section id="model-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="model-in-r">Model in R</h2>
+<p>Use the <code>multinom_reg()</code> function with the <code>"nnet"</code> engine:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>health_fit <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(HealthGen <span class="sc">~</span> Age <span class="sc">+</span> PhysActive, <span class="at">data =</span> nhanes_adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-result" class="level2">
+<h2 class="anchored" data-anchor-id="model-result">Model result</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>health_fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>parsnip model object
+
+Fit time:  113ms 
+Call:
+nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, 
+    trace = FALSE)
+
+Coefficients:
+      (Intercept)           Age PhysActiveYes
+Vgood   1.2053460  0.0009101848    -0.3209047
+Good    1.9476261 -0.0023686122    -1.0014925
+Fair    0.9145492  0.0030462534    -1.6454297
+Poor   -1.5211414  0.0221905681    -2.6556343
+
+Residual Deviance: 17588.88 
+AIC: 17612.88 </code></pre>
+</div>
+</div>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<div class="question">
+<p>What function do we use to get the model summary, i.e., coefficient estimates.</p>
+</div>
+<p>. . .</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-error">
+<pre><code>Error in model.frame.default(formula = HealthGen ~ Age + PhysActive, data = data): 'data' must be a data.frame, environment, or list</code></pre>
+</div>
+</div>
+</section>
+<section id="looking-inside-the-result-of-fit" class="level2">
+<h2 class="anchored" data-anchor-id="looking-inside-the-result-of-fit">Looking inside the result of <code>fit()</code></h2>
+<div class="question">
+<p>What is the name of the dataset in the call? Is it right?</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>health_fit<span class="sc">$</span>fit<span class="sc">$</span>call</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = data, 
+    trace = FALSE)</code></pre>
+</div>
+</div>
+</section>
+<section id="repair-and-get-back-on-track" class="level2">
+<h2 class="anchored" data-anchor-id="repair-and-get-back-on-track">Repair, and get back on track</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>health_fit <span class="ot">&lt;-</span> <span class="fu">repair_call</span>(health_fit, <span class="at">data =</span> nhanes_adult)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>health_fit<span class="sc">$</span>fit<span class="sc">$</span>call</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>nnet::multinom(formula = HealthGen ~ Age + PhysActive, data = nhanes_adult, 
+    trace = FALSE)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 12 × 6
+   y.level term           estimate std.error statistic  p.value
+   &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Vgood   (Intercept)    1.21       0.145       8.33  8.42e-17
+ 2 Vgood   Age            0.000910   0.00246     0.369 7.12e- 1
+ 3 Vgood   PhysActiveYes -0.321      0.0929     -3.45  5.51e- 4
+ 4 Good    (Intercept)    1.95       0.141      13.8   1.39e-43
+ 5 Good    Age           -0.00237    0.00242    -0.977 3.29e- 1
+ 6 Good    PhysActiveYes -1.00       0.0901    -11.1   1.00e-28
+ 7 Fair    (Intercept)    0.915      0.164       5.57  2.61e- 8
+ 8 Fair    Age            0.00305    0.00288     1.06  2.90e- 1
+ 9 Fair    PhysActiveYes -1.65       0.107     -15.3   5.69e-53
+10 Poor    (Intercept)   -1.52       0.290      -5.24  1.62e- 7
+11 Poor    Age            0.0222     0.00491     4.52  6.11e- 6
+12 Poor    PhysActiveYes -2.66       0.236     -11.3   1.75e-29</code></pre>
+</div>
+</div>
+</section>
+<section id="model-output" class="level2">
+<h2 class="anchored" data-anchor-id="model-output">Model output</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 12 × 6
+   y.level term           estimate std.error statistic  p.value
+   &lt;chr&gt;   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Vgood   (Intercept)    1.21       0.145       8.33  8.42e-17
+ 2 Vgood   Age            0.000910   0.00246     0.369 7.12e- 1
+ 3 Vgood   PhysActiveYes -0.321      0.0929     -3.45  5.51e- 4
+ 4 Good    (Intercept)    1.95       0.141      13.8   1.39e-43
+ 5 Good    Age           -0.00237    0.00242    -0.977 3.29e- 1
+ 6 Good    PhysActiveYes -1.00       0.0901    -11.1   1.00e-28
+ 7 Fair    (Intercept)    0.915      0.164       5.57  2.61e- 8
+ 8 Fair    Age            0.00305    0.00288     1.06  2.90e- 1
+ 9 Fair    PhysActiveYes -1.65       0.107     -15.3   5.69e-53
+10 Poor    (Intercept)   -1.52       0.290      -5.24  1.62e- 7
+11 Poor    Age            0.0222     0.00491     4.52  6.11e- 6
+12 Poor    PhysActiveYes -2.66       0.236     -11.3   1.75e-29</code></pre>
+</div>
+</div>
+</section>
+<section id="model-output-with-ci" class="level2">
+<h2 class="anchored" data-anchor-id="model-output-with-ci">Model output, with CI</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 12 × 8
+   y.level term         estimate std.error statistic  p.value conf.low conf.high
+   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Vgood   (Intercept)   1.21e+0   0.145       8.33  8.42e-17  0.922     1.49   
+ 2 Vgood   Age           9.10e-4   0.00246     0.369 7.12e- 1 -0.00392   0.00574
+ 3 Vgood   PhysActiveY… -3.21e-1   0.0929     -3.45  5.51e- 4 -0.503    -0.139  
+ 4 Good    (Intercept)   1.95e+0   0.141      13.8   1.39e-43  1.67      2.22   
+ 5 Good    Age          -2.37e-3   0.00242    -0.977 3.29e- 1 -0.00712   0.00238
+ 6 Good    PhysActiveY… -1.00e+0   0.0901    -11.1   1.00e-28 -1.18     -0.825  
+ 7 Fair    (Intercept)   9.15e-1   0.164       5.57  2.61e- 8  0.592     1.24   
+ 8 Fair    Age           3.05e-3   0.00288     1.06  2.90e- 1 -0.00260   0.00869
+ 9 Fair    PhysActiveY… -1.65e+0   0.107     -15.3   5.69e-53 -1.86     -1.43   
+10 Poor    (Intercept)  -1.52e+0   0.290      -5.24  1.62e- 7 -2.09     -0.952  
+11 Poor    Age           2.22e-2   0.00491     4.52  6.11e- 6  0.0126    0.0318 
+12 Poor    PhysActiveY… -2.66e+0   0.236     -11.3   1.75e-29 -3.12     -2.19   </code></pre>
+</div>
+</div>
+</section>
+<section id="model-output-with-ci-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-output-with-ci-1">Model output, with CI</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">y.level</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1.205</td>
+<td style="text-align: right;">0.145</td>
+<td style="text-align: right;">8.325</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.922</td>
+<td style="text-align: right;">1.489</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.369</td>
+<td style="text-align: right;">0.712</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">0.006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vgood</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-0.321</td>
+<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">-3.454</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">-0.503</td>
+<td style="text-align: right;">-0.139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1.948</td>
+<td style="text-align: right;">0.141</td>
+<td style="text-align: right;">13.844</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">1.672</td>
+<td style="text-align: right;">2.223</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">-0.977</td>
+<td style="text-align: right;">0.329</td>
+<td style="text-align: right;">-0.007</td>
+<td style="text-align: right;">0.002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Good</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-1.001</td>
+<td style="text-align: right;">0.090</td>
+<td style="text-align: right;">-11.120</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-1.178</td>
+<td style="text-align: right;">-0.825</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.915</td>
+<td style="text-align: right;">0.164</td>
+<td style="text-align: right;">5.566</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.592</td>
+<td style="text-align: right;">1.237</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">1.058</td>
+<td style="text-align: right;">0.290</td>
+<td style="text-align: right;">-0.003</td>
+<td style="text-align: right;">0.009</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-1.645</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">-15.319</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-1.856</td>
+<td style="text-align: right;">-1.435</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-1.521</td>
+<td style="text-align: right;">0.290</td>
+<td style="text-align: right;">-5.238</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-2.090</td>
+<td style="text-align: right;">-0.952</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.022</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">4.522</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">0.032</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Poor</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-2.656</td>
+<td style="text-align: right;">0.236</td>
+<td style="text-align: right;">-11.275</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-3.117</td>
+<td style="text-align: right;">-2.194</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="fair-vs.-excellent-health" class="level2">
+<h2 class="anchored" data-anchor-id="fair-vs.-excellent-health">Fair vs.&nbsp;Excellent Health</h2>
+<p>The baseline category for the model is <code>Excellent</code>.</p>
+<p>. . .</p>
+<p>The model equation for the log-odds a person rates themselves as having “Fair” health vs.&nbsp;“Excellent” is</p>
+<p><span class="math display">\[
+\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
+\]</span></p>
+</section>
+<section id="interpretations" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpretations">Interpretations</h2>
+<p><span class="math display">\[
+\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
+\]</span></p>
+<p>For each additional year in age, the odds a person rates themselves as having fair health versus excellent health are expected to multiply by 1.003 (exp(0.003)), holding physical activity constant.</p>
+<p>. . .</p>
+<p>The odds a person who does physical activity will rate themselves as having fair health versus excellent health are expected to be 0.193 (exp(-1.645)) times the odds for a person who doesn’t do physical activity, holding age constant.</p>
+</section>
+<section id="interpretations-1" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations-1">Interpretations</h2>
+<p><span class="math display">\[
+\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}
+\]</span></p>
+<p>The odds a 0 year old person who doesn’t do physical activity rates themselves as having fair health vs.&nbsp;excellent health are 2.497 (exp(0.915)).</p>
+<p>. . .</p>
+<p>⚠️ <strong>Need to mean-center age for the intercept to have a meaningful interpretation!</strong></p>
+</section>
+<section id="hypothesis-test-for-beta_jk" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test-for-beta_jk">Hypothesis test for <span class="math inline">\(\beta_{jk}\)</span></h2>
+<p>The test of significance for the coefficient <span class="math inline">\(\beta_{jk}\)</span> is</p>
+<p><strong>Hypotheses</strong>: <span class="math inline">\(H_0: \beta_{jk} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{jk} \neq 0\)</span></p>
+<p><strong>Test Statistic</strong>: <span class="math display">\[z = \frac{\hat{\beta}_{jk} - 0}{SE(\hat{\beta_{jk}})}\]</span></p>
+<p><strong>P-value</strong>: <span class="math inline">\(P(|Z| &gt; |z|)\)</span>,</p>
+<p>where <span class="math inline">\(Z \sim N(0, 1)\)</span>, the Standard Normal distribution</p>
+</section>
+<section id="confidence-interval-for-beta_jk" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-beta_jk">Confidence interval for <span class="math inline">\(\beta_{jk}\)</span></h2>
+<ul>
+<li><p>We can calculate the <strong>C% confidence interval</strong> for <span class="math inline">\(\beta_{jk}\)</span> using <span class="math inline">\(\hat{\beta}_{jk} \pm z^* SE(\hat{\beta}_{jk})\)</span>, where <span class="math inline">\(z^*\)</span> is calculated from the <span class="math inline">\(N(0,1)\)</span> distribution.</p></li>
+<li><p>We are <span class="math inline">\(C\%\)</span> confident that for every one unit change in <span class="math inline">\(x_{j}\)</span>, the odds of <span class="math inline">\(y = k\)</span> versus the baseline will multiply by a factor of <span class="math inline">\(\exp\{\hat{\beta}_{jk} - z^* SE(\hat{\beta}_{jk})\}\)</span> to <span class="math inline">\(\exp\{\hat{\beta}_{jk} + z^* SE(\hat{\beta}_{jk})\}\)</span>, holding all else constant.</p></li>
+</ul>
+</section>
+<section id="interpreting-cis-for-beta_jk" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpreting-cis-for-beta_jk">Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(y.level <span class="sc">==</span> <span class="st">"Fair"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">y.level</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.915</td>
+<td style="text-align: right;">0.164</td>
+<td style="text-align: right;">5.566</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.592</td>
+<td style="text-align: right;">1.237</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">1.058</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">-0.003</td>
+<td style="text-align: right;">0.009</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-1.645</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">-15.319</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">-1.856</td>
+<td style="text-align: right;">-1.435</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
+<p>. . .</p>
+<p>We are 95% confident, that for each additional year in age, the odds a person rates themselves as having fair health versus excellent health will multiply by 0.997 (exp(-0.003)) to 1.009 (exp(0.009)) , holding physical activity constant.</p>
+</section>
+<section id="interpreting-cis-for-beta_jk-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="interpreting-cis-for-beta_jk-1">Interpreting CIs for <span class="math inline">\(\beta_{jk}\)</span></h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(health_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(y.level <span class="sc">==</span> <span class="st">"Fair"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">y.level</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.915</td>
+<td style="text-align: right;">0.164</td>
+<td style="text-align: right;">5.566</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.592</td>
+<td style="text-align: right;">1.237</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">1.058</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">-0.003</td>
+<td style="text-align: right;">0.009</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fair</td>
+<td style="text-align: left;">PhysActiveYes</td>
+<td style="text-align: right;">-1.645</td>
+<td style="text-align: right;">0.107</td>
+<td style="text-align: right;">-15.319</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">-1.856</td>
+<td style="text-align: right;">-1.435</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
+<p>We are 95% confident that the odds a person who does physical activity will rate themselves as having fair health versus excellent health are 0.156 (exp(-1.856 )) to 0.238 (exp(-1.435)) times the odds for a person who doesn’t do physical activity, holding age constant.</p>
+</section>
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<ul>
+<li><p>Introduce multinomial logistic regression</p></li>
+<li><p>Interpret model coefficients</p></li>
+<li><p>Inference for a coefficient <span class="math inline">\(\beta_{jk}\)</span></p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    function fireSlideChanged(previousSlide, currentSlide) {
+
+      // dispatch for htmlwidgets
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for reveal
+    if (window.Reveal) {
+      window.Reveal.addEventListener("slidechanged", function(event) {
+        fireSlideChanged(event.previousSlide, event.currentSlide);
+      });
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© Copyright 2022, Mine Çetinkaya-Rundel</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: trabalho1.aux
+The style file: agsm.bst
+Database file #1: referencias.bib
+Warning--can't use both author and editor fields in draper1998
+Warning--empty publisher in draper1998
+Warning--can't use both author and editor fields in montgomery2006
+Warning--empty publisher in montgomery2006
+You've used 19 entries,
+            2909 wiz_defined-function locations,
+            762 strings with 7399 characters,
+and the built_in function-call counts, 70679 in all, are:
+= -- 11445
+> -- 868
+< -- 1
++ -- 5375
+- -- 259
+* -- 6063
+:= -- 14334
+add.period$ -- 19
+call.type$ -- 19
+change.case$ -- 264
+chr.to.int$ -- 19
+cite$ -- 23
+duplicate$ -- 302
+empty$ -- 634
+format.name$ -- 330
+if$ -- 12673
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 22
+newline$ -- 60
+num.names$ -- 195
+pop$ -- 71
+preamble$ -- 1
+purify$ -- 285
+quote$ -- 0
+skip$ -- 242
+stack$ -- 0
+substring$ -- 16123
+swap$ -- 52
+text.length$ -- 267
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 4
+while$ -- 413
+width$ -- 0
+write$ -- 241
+(There were 4 warnings)

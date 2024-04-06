@@ -1,0 +1,7 @@
+- source: exercicio.qmd
+  quarto-pub:
+    - id: c4f83695-c25c-4763-ac55-7a861ddd327f
+      url: 'https://sadraquelucena.quarto.pub/exercicio'
+  netlify:
+    - id: f4334327-3a96-4e3c-98b7-dd8884b0ebe8
+      url: 'https://famous-sunflower-73cbe7.netlify.app'

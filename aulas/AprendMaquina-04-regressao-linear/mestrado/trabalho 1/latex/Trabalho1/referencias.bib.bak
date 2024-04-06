@@ -1,0 +1,380 @@
+% This file was created with JabRef 2.7.1.
+% Encoding: Cp1252
+
+@BOOK{montgomery2006,
+  title = {Introduction to linear regression analysis},
+  year = {2006},
+  editor = {Wiley Series in Probability and Statistics},
+  author = {Douglas C. Montgo\-mery and Elizabeth A. Peck and G. Geoffrey Vining},
+  edition = {4th},
+  owner = {Hermínia},
+  timestamp = {2011.11.08}
+}
+
+@ARTICLE{ramsland1998,
+  author = {M O Rams\-land and D E Markham},
+  title = {Market-supported adjustments using multiple regression analysis},
+  journal = {Appraisal Journal},
+  year = {1998},
+  volume = {66},
+  pages = {181-191},
+  number = {2},
+  month = {Apr},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{Bailey1963,
+  author = {Martin J. Bailey and Richard F. Muth and Hugh O. Nourse},
+  title = {A Regression Method for Real Estate Price Index Construction},
+  journal = {Journal of the American Statistical Association},
+  year = {1963},
+  volume = {58},
+  pages = {933-942},
+  number = {304},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{boxcox1964,
+  author = {G.E.P. Box and D.R. Cox},
+  title = {An analysis of tranformations},
+  journal = {Journal of the Royal Statistical Society},
+  year = {1964},
+  volume = {26},
+  pages = {211-252},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@ARTICLE{pagan1979,
+  author = {T.S. Breusch and A.R. Pagan},
+  title = {Simple test for heteroscedasticity and random coefficient variation},
+  journal = {Econometrica},
+  year = {1979},
+  volume = {47},
+  pages = {1287-1294},
+  owner = {Hermínia},
+  timestamp = {2011.10.28}
+}
+
+@ARTICLE{cooketal1986,
+  author = {R. Cook and C. Tsai and B. Wei},
+  title = {Bias in nonlinear regression},
+  journal = {Biometrika},
+  year = {1986},
+  volume = {73},
+  pages = {615-623},
+  owner = {Sadraque},
+  timestamp = {2011.05.28}
+}
+
+@ARTICLE{cordeiroetal1997,
+  author = {Gauss M. Cordeiro and Enivaldo C. da Rocha and Jacira Guiro C. da
+	Rocha and
+	
+	Francisco {Cribari-Neto}},
+  title = {Bias-corrected maximum likelihood estimation for the beta distribution},
+  journal = {J. Statist. Comput. Simul.},
+  year = {1997},
+  volume = {58},
+  pages = {21-35},
+  owner = {Sadraque},
+  timestamp = {2011.05.27}
+}
+
+@ARTICLE{cribari2004,
+  author = {F. {Cribari-Neto}},
+  title = {Asymptotic inference under heteroscedasticity of unknown form},
+  journal = {Computational Statistics \& Data Analysis},
+  year = {2004},
+  volume = {45},
+  pages = {215-233},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@ARTICLE{cribari2007,
+  author = {F. {Cribari-Neto} and T.C Souza and K.L.P. Vasconcellos},
+  title = {Inference under heteroscedasticity and leveraged data},
+  journal = {Comunications in Statistics, Theory and Methods},
+  year = {2007},
+  volume = {36},
+  pages = {1877-1888},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@ARTICLE{cribariklaus2002,
+  author = {Francisco {Cribari-Neto} and Klaus L. P. Vasconcelos},
+  title = {Nearly unbiased maximum likelihood estimation for the beta distribution},
+  journal = {J. Statist. Comput. Simul.},
+  year = {2002},
+  volume = {72},
+  pages = {107-108},
+  number = {2},
+  owner = {Sadraque},
+  timestamp = {2011.05.27}
+}
+
+@ARTICLE{cribari2003,
+  author = {Francisco {Cribari-Neto} and Spyros G. Zarkos},
+  title = {Econometric and Statistical Computing Using Ox},
+  journal = {Computational Economics},
+  year = {2003},
+  volume = {21},
+  pages = {277-295},
+  owner = {Sadraque},
+  timestamp = {2011.07.11}
+}
+
+@BOOK{dantas1998,
+  title = {Engenharia de avaliações},
+  publisher = {Pini},
+  year = {1998},
+  author = {R A Dantas},
+  address = {São Paulo},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{davidson1993,
+  author = {R. Davidson and J.G. MacKinnon},
+  title = {Estimation and Inference in Econometrics},
+  journal = {New York: Oxford University Press},
+  year = {1993},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@BOOK{hinkley1997,
+  title = {Bootstrap methods and their application},
+  publisher = {Cambridge University Press},
+  year = {1997},
+  author = {A. C. Davison and D. V. Hinkley},
+  owner = {Sadraque},
+  timestamp = {2011.05.25}
+}
+
+@BOOK{draper1998,
+  title = {Applied regression analysis},
+  year = {1998},
+  editor = {Wiley Series in Probability and Statistics},
+  author = {Norman R Draper and Harry Smith},
+  volume = {3},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@BOOK{efron1982,
+  title = {The Jackknife, the Bootstrap and Other Resampling Plans},
+  publisher = {SIAM},
+  year = {1982},
+  author = {Bradlet Efron},
+  address = {Philadelphia},
+  owner = {Sadraque},
+  timestamp = {2011.05.27}
+}
+
+@ARTICLE{efron1979,
+  author = {B. Efron},
+  title = {Bootstrap methods: another look at the jackknife},
+  journal = {Annals of Statistics},
+  year = {1979},
+  owner = {Joï¿½o Andrade},
+  timestamp = {2011.05.28}
+}
+
+@BOOK{efrontib1993,
+  title = {An introduction to the bootstrap},
+  publisher = {Chapman \& Hall},
+  year = {1993},
+  author = {B. Efron and R. J. Tibshirani},
+  address = {New York},
+  owner = {Sadraque},
+  timestamp = {2011.05.28}
+}
+
+@BOOK{cribari2005,
+  title = {Elementos de Estatística Computacional Usando Plataformas de Software
+	Livre/Gratuito},
+  publisher = {Instituto de Matemática Pura e Aplicada},
+  year = {2005},
+  author = {Alejandro C. {Frery} and Francisco {Cribari-Neto}},
+  address = {Rio de Janeiro},
+  owner = {Sadraque},
+  timestamp = {2011.07.11}
+}
+
+@MANUAL{gsl2003,
+  title = {GNU Scientific Library Reference Manual, 3rd ed., for version 1.12},
+  author = {Mark Galassi and Jim Davies and James Theiler and Brian Gough and
+	Gerard Jungman and Michael Booth and Fabrice Rossi},
+  organization = {Free Software Foundation},
+  edition = {1.4},
+  year = {2003},
+  owner = {Sadraque},
+  timestamp = {2011.07.11}
+}
+
+@ARTICLE{isakson2001,
+  author = {H R Isakson},
+  title = {Using multiple regression analysis in real estate appraisal},
+  journal = {Appraisal Journal},
+  year = {2001},
+  volume = {69},
+  pages = {424-430},
+  number = {4},
+  month = {Oct},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{ramsey1969,
+  author = {J.B.Ramsey},
+  title = {Tests for Specification Errors in Classical Linear Least Squares
+	Regression Analysis},
+  journal = {Journal of the Royal Statistical Society},
+  year = {1969},
+  volume = {31},
+  pages = {350-371},
+  owner = {Hermínia},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{kimsun2010,
+  author = {Min Seong Kim and Yixiao Sun},
+  title = {k-Step Bootstrap Bias Correction for Fixed Effects Estimators in
+	Nonlinear Panel Models},
+  journal = {SSRN eLibrary},
+  year = {2010},
+  owner = {Sadraque},
+  timestamp = {2011.05.28}
+}
+
+@ARTICLE{koenker1981,
+  author = {R. Koenker},
+  title = {A note on Studentizing a test got heteroscedasticity.},
+  journal = {Jornal of Econometrics},
+  year = {1981},
+  volume = {17},
+  pages = {107-112},
+  owner = {Hermínia},
+  timestamp = {2011.10.29}
+}
+
+@MASTERSTHESIS{lopes2007,
+  author = {Lopes, E. A. C.},
+  title = {Correção de viés no modelo de regressão normal assimétrico},
+  school = {UFPE},
+  year = {2007},
+  type = {Mestrado em Estatística},
+  owner = {Sadraque},
+  timestamp = {2011.05.28}
+}
+
+@ARTICLE{white1985,
+  author = {J.G. MacKinnon and H. White},
+  title = {Some heteroscedasticity-consistent covariance matrix estimators with
+	improved finite-sample properties},
+  journal = {Jor},
+  year = {1985},
+  volume = {29},
+  pages = {305-325},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@ARTICLE{moreira2010,
+  author = {Daniela Souza Moreira and Ramicés dos Santos Silva and Anita Maria
+	da Rocha Fernandes},
+  title = {Engenharia de Avaliações de Imóveis apoiada em Técnicas de Análise
+	Multicritério e Redes Neurais Artificiais},
+  journal = {Revista de Sistemas de Informação da FSMA},
+  year = {2010},
+  volume = {6},
+  pages = {49-58},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{negraoetal2001,
+  author = {Ivani de Oliveira Negrão and Luiz Henrique de Aquino and Eduardo
+	Bearzoti},
+  title = {Avaliação de quatro métodos de estimação dos parâmetros da distribuição
+	beta-binomial pela simulação Monte Carlo},
+  journal = {Ciênc. agrotec.},
+  year = {2001},
+  volume = {25},
+  pages = {1370-1381},
+  number = {6},
+  owner = {Sadraque},
+  timestamp = {2011.05.27}
+}
+
+@BOOK{press1993,
+  title = {Numerical Recipes in C: The Art of Scientific Computing},
+  publisher = {Cambridge University Press},
+  year = {1993},
+  author = {William H. Press and Saul A. Teukolsky and William T. Vetterling
+	and Brian P. Flannery},
+  owner = {Sadraque},
+  timestamp = {2011.07.11}
+}
+
+@ARTICLE{Schwarz1978,
+  author = {G Schwarz},
+  title = {Estimating the dimension of a model},
+  journal = {Annals of Statistics},
+  year = {1978},
+  volume = {6},
+  pages = {461-464},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{Steiner2008,
+  author = {Maria Teresinha Arns Steiner and Anselmo Chaves Neto and Sílvia Neide
+	Braulio and Valdir Alves},
+  title = {Métodos estatísticos multivariados aplicados à engenharia de avaliações},
+  journal = {Gest. Prod.},
+  year = {2008},
+  volume = {15},
+  pages = {23-32},
+  number = {1},
+  month = {jan-abr},
+  owner = {Sadraque},
+  timestamp = {2011.10.29}
+}
+
+@ARTICLE{bunig2004,
+  author = {T Thadewald and H Büning},
+  title = {Jarque-Bera Test and its Competitors
+	
+	for Testing Normality - A Power Comparison},
+  journal = {Institute for Statistics and Econometrics},
+  year = {2004},
+  owner = {Hermínia},
+  timestamp = {2011.10.28}
+}
+
+@ARTICLE{white1980,
+  author = {H. White},
+  title = {A heteroskedasticity-consistent covariance matrix estimator and a
+	direct test for heteroskedasticity},
+  journal = {Econometrica},
+  year = {1980},
+  volume = {48 (4)},
+  pages = {817-838},
+  owner = {Hermínia},
+  timestamp = {2011.10.30}
+}
+
+@comment{jabref-meta: selector_publisher:}
+
+@comment{jabref-meta: selector_author:}
+
+@comment{jabref-meta: selector_journal:}
+
+@comment{jabref-meta: selector_keywords:}
+

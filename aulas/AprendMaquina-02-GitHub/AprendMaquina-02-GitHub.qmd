@@ -57,3 +57,25 @@ Forneça seu nome e e-mail associados à conta do GitHub:
 
 `git init <diretorio>`
 
+
+git init
+git status
+git add "plano de ensino"
+git commit -m "commit inicial"
+git push
+git remote add origin https://github.com/sadraquelucena/IntroducaoR
+git push
+git push --set-upstream origin master
+git pull
+git pull origin master
+git pull origin master --rebase
+git add "plano de ensino"
+git commit -m "commit inicial"
+git push origin master
+
+
+
+git add quarto
+git commit -m "aula de quarto"
+git push
+git push --set-upstream origin master

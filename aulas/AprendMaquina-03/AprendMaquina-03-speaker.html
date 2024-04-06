@@ -545,7 +545,7 @@ Prof.&nbsp;Dr.&nbsp;Sadraque E.F. Lucena
 <h2>Dimensionalidade</h2>
 <ul>
 <li><p>A dimensionalidade de um conjunto de dados representa o número de atributos.</p></li>
-<li><p>Quanto maior a dimensionalidade do conjunto de dados, mais detalhes temso sobre os dados, mas também aumenta a complexidade computacional e o consumo de recursos.</p></li>
+<li><p>Quanto maior a dimensionalidade do conjunto de dados, mais detalhes temos sobre os dados, mas também aumenta a complexidade computacional e o consumo de recursos.</p></li>
 <li><p>Posteriormente, discutiremos algumas abordagens para reduzir a dimensionalidade de um conjunto de dados, a fim de facilitar o trabalho com aprendizado de máquina.</p></li>
 </ul>
 </section>
@@ -578,7 +578,7 @@ Prof.&nbsp;Dr.&nbsp;Sadraque E.F. Lucena
 <h2>Estatística descritiva</h2>
 <ul>
 <li><p>A estatística descritiva é útil na exploração e compreensão dos dados.</p></li>
-<li><p>Frequência e modea são medidas úteis para descrever atributos categóricos.</p></li>
+<li><p>Frequência e moda são medidas úteis para descrever atributos categóricos.</p></li>
 <li><p>Para dados contínuos, média e mediana são estatísticas mais usadas para descrever as propriedades dos dados.</p></li>
 <li><p>No R, um resumo das estatísticas pode ser obtido com a função <span class="dstq"><strong>summary()</strong></span>.</p>
 <ul>
@@ -587,7 +587,7 @@ Prof.&nbsp;Dr.&nbsp;Sadraque E.F. Lucena
 <li><p><span class="dstq"><strong>select:</strong></span> para escolher colunas ou variáveis.</p></li>
 <li><p><span class="dstq"><strong>filter:</strong></span> para escolher linhas ou observações.</p></li>
 <li><p><span class="dstq"><strong>arrange:</strong></span> para ordendar linhas.</p></li>
-<li><p><span class="dstq"><strong>mutate:</strong></span> para moficiar variáveis.</p></li>
+<li><p><span class="dstq"><strong>mutate:</strong></span> para modificar variáveis.</p></li>
 <li><p><span class="dstq"><strong>summarize:</strong></span> para agregar linhas.</p></li>
 </ul></li>
 </ul></li>
@@ -768,7 +768,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <li>Tipicamente usado em atributos contínuos para ilustrar a correlação entre duas ou mais variáveis.</li>
 <li>Uma das visualizações mais usadas é o <span class="dstq">gráfico de pontos</span>. Ele é usado para responder questões como:
 <ul>
-<li>Há um tributo significativo?</li>
+<li>Há um atributo significativo?</li>
 <li>Como os atributos interagem entre si?</li>
 <li>Existem outliers nos dados?</li>
 </ul></li>
@@ -796,13 +796,13 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <h2>Distribuição</h2>
 <ul>
 <li>As visualizações de distribuição mostram a distribuição estatística dos valores de um atributo.</li>
-<li>Uma das visualizações mais usadas é o histrograma, que permite mostrar a dispersão e a assimetria de um atributo.</li>
+<li>Uma das visualizações mais usadas é o histograma, que permite mostrar a dispersão e a assimetria de um atributo.</li>
 <li>Algumas perguntas que o histograma ajuda a responder são:
 <ul>
 <li>De qual distribuição populacional os dados são oriundos?</li>
 <li>Onde os dados estão localizados?</li>
 <li>Quão dispersos estão os dados?</li>
-<li>Os dados são simétrios?</li>
+<li>Os dados são simétricos?</li>
 <li>Há <em>outliers</em>?</li>
 </ul></li>
 </ul>
@@ -828,7 +828,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <ul>
 <li>Uma visualização de composição mostra a composição dos componentes dos dados.</li>
 <li><span class="dstq">Gráficos de barras empilhadas</span> e <span class="dstq">gráficos de pizza</span> (ou setores) são duas das visualizações de composição mais comumente usadas.</li>
-<li>Com um gráfico de barras empilhadas, é possível mostrar como um valor total pode ser dividido em partes ou destacar a importância de cada parte em relação ao valor total. Ele ajuda a responder pergutnas como:
+<li>Com um gráfico de barras empilhadas, é possível mostrar como um valor total pode ser dividido em partes ou destacar a importância de cada parte em relação ao valor total. Ele ajuda a responder perguntas como:
 <ul>
 <li>Como as distribuições variam dentro dos subgrupos?</li>
 <li>Qual é a mudança relativa na composição ao longo do tempo?</li>
@@ -1016,7 +1016,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <ul>
 <li>O ruído representa a variação aleatória nos dados e pode ser introduzido durante a coleta e o processamento dos dados.</li>
 <li>É importante que os algoritmos de aprendizado de máquina possam lidar com o ruído, minimizando seu impacto em vez de tentar removê-lo.</li>
-<li>Se o ruído for um problema para o método, podemos usar algum método de suavização:
+<li>Se o ruído for um problema para o método, podemos usar algum método de suavização, tais como:
 <ul>
 <li>suavização com médias de intervalos;</li>
 <li>suavização com limites de intervalos;</li>
@@ -1031,8 +1031,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <ul>
 <li>Envolve a divisão dos dados em intervalos e a substituição dos valores em cada intervalo pela média desses valores.</li>
 <li>O número de intervalos é determinado pelo usuário, e a escolha afeta a quantidade de redução de ruído: mais intervalos reduzem o ruído menos, enquanto menos intervalos reduzem o ruído mais.</li>
-<li>Como exemplo, em um conjunto de dados ordenados, ao dividir em três intervalos, substituímos os valores em cada intervalo pela média do intervalo, resultando em uma versão suavizada dos dados.</li>
-<li>Exemplo: <span class="math display">\[ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 \]</span> <span class="math display">\[ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} \]</span> <span class="math display">\[ \color{blue}{9, 9, 9, 9}, 23, 23, 23, 23, \color{red}{29, 29, 29, 29} \]</span></li>
+<li>Exemplo: dividir um conjunto de dados ordenados em três intervalos.<span class="math display">\[ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 \]</span> <span class="math display">\[ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} \]</span> <span class="math display">\[ \color{blue}{9, 9, 9, 9}, 23, 23, 23, 23, \color{red}{29, 29, 29, 29} \]</span></li>
 </ul>
 </section>
 <section id="limpeza-dos-dados-10" class="slide level2">
@@ -1080,18 +1079,18 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <li>Em problemas de classificação, quanto mais exemplos de treinamento o algoritmo recebe, melhor é sua capacidade de atribuir rótulos aos novos dados.</li>
 <li>Quando uma das classes possui muito mais observações que a outra, isso desequilibra a capacidade do modelo de aprender e fazer previsões precisas.</li>
 <li>Isso pode levar a resultados tendenciosos, onde o modelo tem um bom desempenho para a classe majoritária, mas não consegue prever com precisão a classe minoritária.</li>
-<li>Outro problema é que o aprendizado com dadso desbalanceados pode resultar em modelos com precisão preditiva enganosamente otimista (mais fáci clssificar todo mundo em uma classe, já que poucas observações pertencem à outra).</li>
+<li>Outro problema é que o aprendizado com dados desbalanceados pode resultar em modelos com precisão preditiva enganosamente otimista (mais fáci classificar todo mundo em uma classe, já que poucas observações pertencem à outra).</li>
 </ul>
 </section>
 <section id="limpeza-dos-dados-15" class="slide level2">
 <h2>Limpeza dos dados</h2>
-<h3 id="desbalanceamanto-de-classe-1">Desbalanceamanto de classe</h3>
-<p>Métodos para resulver o problema:</p>
+<h3 id="desbalanceamento-de-classe">Desbalanceamento de classe</h3>
+<p>Métodos para resolver o problema:</p>
 <ul>
 <li><span class="dstq">Coletar mais dados</span> para minimizar o desbalanceamento.</li>
 <li><span class="dstq">Mudar a métrica de desempenho:</span> utilizar medidas como <em>precisão</em>, <em>recall</em>, <em>kappa</em> e a <em>curva ROC</em> em vez de depender unicamente da acurácia (precisão).</li>
 <li><span class="dstq">Tentar um algoritmo diferente:</span> considere a utilização de algoritmos como árvores de decisão e florestas aleatórias, que lidam bem com o desbalanceamento de classes em problemas de machine learning.</li>
-<li><span class="dstq">Reamostragem dos dados:</span> subamostrar a classe majoritária (<em>under-sampling</em>) ou a superamostrar da classe minoritária (<em>over-sampling</em>), inclusive com a geração de exemplos sintéticos, como feito pelo algoritmo <em>Synthetic Minority Over-sampling Technique</em> (SMOTE).</li>
+<li><span class="dstq">Reamostragem dos dados:</span> subamostrar a classe majoritária (<em>under-sampling</em>) ou a superamostrar da classe minoritária (<em>over-sampling</em>), incluindo a geração de exemplos sintéticos, como feito pelo algoritmo <em>Synthetic Minority Over-sampling Technique</em> (SMOTE).</li>
 </ul>
 </section></section>
 <section>
@@ -1103,7 +1102,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <h2>Transformação dos dados</h2>
 <ul>
 <li>Frequentemente é preciso modificar a estrutura ou características dos dados para atender às necessidades da aprendizagem de máquina.</li>
-<li>Algumass técnicas usadas são:
+<li>Algumas técnicas usadas são:
 <ul>
 <li>Normalização;</li>
 <li>Discretização;</li>
@@ -1162,7 +1161,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 </ul>
 </div><div class="column fragment" style="width:60%;">
 <ul>
-<li>Como o maior valo é 1269.6, vamos dividir por <span class="math inline">\(10^4\)</span></li>
+<li>Como o maior valor é 1269.6, vamos dividir por <span class="math inline">\(10^4\)</span></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21" data-code-line-numbers="1|1-2|1-3|1-4"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>veiculos <span class="sc">%&gt;%</span></span>
@@ -1219,7 +1218,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <h3 id="normalização-5">Normalização</h3>
 <h4 id="normalização-min-max">Normalização Min-Max</h4>
 <ul>
-<li>Os dados originais são trasnformados para um novo intervalo definido pelos limites inferior e superior especificados pelo usuário, frequentemente 0 e 1.</li>
+<li>Os dados originais são transformados para um novo intervalo definido pelos limites inferior e superior especificados pelo usuário, frequentemente 0 e 1.</li>
 <li>Matematicamente, temos <span class="math display">\[ v' = \frac{v-min_v}{max_v - min_v}\times (L_{sup} -L_{inf}) + L_{inf}, \]</span> em que <span class="math inline">\(min_v\)</span> e <span class="math inline">\(max_v\)</span> são, respectivamente, o menor e o maior valor observado em <span class="math inline">\(v\)</span> e <span class="math inline">\(L_{inf}\)</span> e <span class="math inline">\(L_{sup}\)</span> são, resepctivamente, os limites inferior e superior do intervalo definido pelo usuário.</li>
 </ul>
 </section>
@@ -1252,7 +1251,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <h3 id="normalização-7">Normalização</h3>
 <h4 id="transformação-logarítmica">Transformação logarítmica</h4>
 <ul>
-<li>As transformações anteriores são boas quandoos dados são simétricos.</li>
+<li>As transformações anteriores são boas quando os dados são simétricos.</li>
 <li>A transformação logarítmica é mais adequada para distribuições assimétricas e dados com valores que variam amplamente em magnitude.</li>
 <li>A transformação é <span class="math display">\[ v' = \log(v). \]</span></li>
 </ul>
@@ -1383,6 +1382,10 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 </div>
 </div>
 </div>
+</section>
+<section id="transformação-dos-dados-15" class="slide level2">
+<h2>Transformação dos dados</h2>
+<h3 id="variáveis-dummy-3">Variáveis dummy</h3>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31" data-code-line-numbers="1|1-3|1-4"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>veiculos2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(veiculos2)</span>
@@ -1418,7 +1421,7 @@ $ co2emissions       &lt;dbl&gt; 555.4375, 555.4375, 484.7619, 424.1667, 555.437
 <section id="redução-dos-dados-1" class="slide level2">
 <h2>Redução dos dados</h2>
 <ul>
-<li>Algumas vezes precisamos reduzir os número de observações, o número de variáveis, ou ambos para utlização de um modelo de aprendizado de máquina.</li>
+<li>Algumas vezes precisamos reduzir os número de observações, o número de variáveis, ou ambos para utilização de um modelo de aprendizado de máquina.</li>
 <li>As técnicas mais comuns são:
 <ul>
 <li>Amostragem;</li>

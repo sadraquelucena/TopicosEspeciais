@@ -1,0 +1,11 @@
+---
+title: "Material"
+---
+
+## Slides
+
+Slides-01: [html](https://sadraquelucena.quarto.pub/estat0016-slides-01/#/title-slide) [pdf](https://drive.google.com/file/d/1_jWOcoUBbE2PgTvp9n0XePm3aiIOLowx/view?usp=drive_link)
+
+Slides-02: [html](https://sadraquelucena.quarto.pub/tratando-os-dados/#/title-slide) [pdf](https://drive.google.com/file/d/1CxMvpNRYUP67UDlGw2z4heeWSs1U2jTu/view?usp=drive_link)
+
+## Códigos em R

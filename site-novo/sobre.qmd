@@ -1,0 +1,98 @@
+---
+title: "Sobre o curso"
+lang: pt
+---
+
+## Dados
+
+**Componente curricular:** ESTAT0016 -- Tópicos Especiais em Estatística (Introdução à aprendizagem de máquina)
+
+**Professor responsável:** Dr. Sadraque E. F. Lucena
+
+**Carga horária:** 60 horas (4 créditos)
+
+**Horário:**
+
+-   Segundas -- 17h00 às 18h50
+-   Quintas -- 17h00 às 18h50
+
+**Local:** Laboratório do Informática do DECAT
+
+**Tipo de componente:** Disciplina
+
+**Unidade Responsável:** Departamento de Estatística e Ciências Atuariais (DECAT)
+
+**Período letivo:** 2023-2
+
+**Quantidade de avaliações:** 2
+
+## Ementa
+
+Pré-processamento de dados. Aprendizado supervisionado. Regressão. Classificação. $k$-Nearest Neighbors. Na"ive Bayes. Árvores de Decisão. Florestas aleatórias. Avaliação de desempenho. Validação Cruzada. Métricas de desempenho de Classificação. Ajuste de parâmetros. Bagging, Boosting e Stacking. Aprendizado não supervisionado. Regras de Associação. $k$-means.
+
+## Objetivos
+
+Introduzir os conceitos fundamentais e técnicas da aprendizagem de máquina.
+
+## Metodologia
+
+Serão ministradas aulas teóricas expositivas; utilizados recursos visuais e computacionais; aplicação dos métodos em sala de aula; solicitação de atividades extraclasse.
+
+## Habilidades e Competências
+
+No final deste curso, os(as) alunos(as) deverão estar equipa dos(as) com as habilidades e o entendimento necessários para aplicar a aprendizagem de máquina em diversos contextos, preparando-os(as) para carreiras em estatística, ciência de dados, inteligência artificial e análise de dados.
+
+## Avaliação
+
+Será realizada uma avaliação contı́nua, com solicitação de atividades extraclasse e apresentações em sala de aula. Duas avaliações também serão realizadas ao longo do semestre.
+
+## Conteúdo
+
+1.  Pré-processamento de Dados
+    a.  Exploração
+    b.  Limpeza
+    c.  Transformação
+    d.  Redução
+2.  Aprendizado Supervisionado
+    a.  Regressão
+        i.  Regressão linear
+        ii. Regressão logı́stica
+    b.  $k$-Nearest Neighbors
+    c.  Naı̈ve Baye
+    d.  Árvores de Decisão
+    e.  Florestas aleatórias
+    f.  Avaliação de desempenho
+        i.  Validação Cruzada
+        ii. Amostragem bootstrap
+        iii. Acurácia
+        iv. Kappa
+        v.  Precisão e revocação
+        vi. Sensibilidade e especificidade
+    g.  Ajuste de parâmetros
+    h.  Métodos de conjunto (ensemble methods)
+        i.  Bagging
+        ii. Boosting
+        iii. Stacking
+3.  Aprendizado Não Supervisionado
+    a.  Regras de Associação
+    b.  $k$-means
+
+## Bibliografia
+
+#### Básica
+
+FACELI, Katti. **Inteligência artificial: uma abordagem de aprendizado de máquina.** Rio de Janeiro: LTC, 2011. 378 p.
+
+IZBICKI, Rafael; DOS SANTOS, Tiago Mendonça. **Aprendizado de máquina: uma abordagem estatı́stic**a \[livro eletrônico\]. São Carlos: Rafael Izbicki, 2020.
+
+NWANGANGA, Fred; CHAPPLE, Mike. **Practical machine learning in R.** Indianapolis: John Wiley & Sons, 2020.
+
+ABU-MOSTAFA, Yaser S.; MAGDON-ISMAIL, Malik; LIN, Hsuan-Tien. **Learning from data.** New York: AMLBook, 2012.
+
+HASTIE, Trevor et al. **The elements of statistical learning: data mining, inference, and prediction.** New York: springer, 2009.
+
+#### Complementar
+
+RAMASUBRAMANIAN, Karthik; SINGH, Abhishek. **Machine learning using R.** New Delhi, India: Apress, 2017.
+
+LANTZ, Brett. **Machine learning with R: expert techniques for predictive modeling.** Packt publishing ltd, 2019.

@@ -2,3 +2,7 @@
   quarto-pub:
     - id: 7d0ec52f-2718-4ccb-8eb1-46e21f8df225
       url: 'https://sadraquelucena.quarto.pub/tratando-os-dados'
+- source: AprendMaquina-03.qmd
+  quarto-pub:
+    - id: 8125153b-cebb-4082-ad1b-7203876f7b78
+      url: 'https://sadraquelucena.quarto.pub/tratando-os-dados-6f5a'

@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Mine Çetinkaya-Rundel">
+
+<title>STA 210 - Spring 2022 - LR: Inference + conditions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta property="og:title" content="STA 210 - Spring 2022 - LR: Inference + conditions">
+<meta property="og:description" content="STA 210 - Spring 2022">
+<meta property="og:image" content="https://sta210-s22.github.io/website/slides/lec-22_files/figure-revealjs/unnamed-chunk-11-1.png">
+<meta property="og:site-name" content="STA 210 - Spring 2022">
+<meta property="og:image:height" content="4449">
+<meta property="og:image:width" content="7200">
+<meta name="twitter:title" content="STA 210 - Spring 2022 - LR: Inference + conditions">
+<meta name="twitter:description" content="STA 210 - Spring 2022">
+<meta name="twitter:image" content="https://sta210-s22.github.io/website/slides/images/twitter-card.png">
+<meta name="twitter:creator" content="@minebocek">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LR: Inference + conditions</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/sta210-s22" rel="" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
+    <a href="https://cmgr.oit.duke.edu/containers" rel="" title="RStudio Containers" class="quarto-navigation-tool px-1" aria-label="RStudio Containers"><i class="bi bi-code-square"></i></a>
+    <div class="dropdown">
+      <a href="" title="Sakai" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Sakai"><i class="bi bi-person-fill"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/13b6446a-a6c6-4222-8cfb-c36d1f70802b">
+            Discussion forum
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/page/aec742dc-2972-4f02-a35b-1dd3315af889">
+            Gradescope
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://sakai.duke.edu/portal/site/779c3ebe-3b88-4bcc-bd01-1813e8396a23/tool/69078433-67a6-4054-a2e7-9e6c202ecdc3/">
+            Gradebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Course information</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-support.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-team.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching team</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-links.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful links</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Computing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../computing-access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Access</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../computing-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-tips-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tips + resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../weeks/week-15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Supplemental notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/slr-derivations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLR derivations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/model-diagnostics-matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model diagnostics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/mlr-matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MLR matrix notation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/log-transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Log transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../supplemental/model-selection-criteria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model selection criteria</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#computational-setup" id="toc-computational-setup" class="nav-link" data-scroll-target="#computational-setup">Computational setup</a></li>
+  </ul></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#risk-of-coronary-heart-disease" id="toc-risk-of-coronary-heart-disease" class="nav-link" data-scroll-target="#risk-of-coronary-heart-disease">Risk of coronary heart disease</a></li>
+  <li><a href="#data-prep" id="toc-data-prep" class="nav-link" data-scroll-target="#data-prep">Data prep</a></li>
+  </ul></li>
+  <li><a href="#inference-for-a-model" id="toc-inference-for-a-model" class="nav-link" data-scroll-target="#inference-for-a-model">Inference for a model</a>
+  <ul class="collapse">
+  <li><a href="#modeling-risk-of-coronary-heart-disease" id="toc-modeling-risk-of-coronary-heart-disease" class="nav-link" data-scroll-target="#modeling-risk-of-coronary-heart-disease">Modeling risk of coronary heart disease</a></li>
+  <li><a href="#model-output" id="toc-model-output" class="nav-link" data-scroll-target="#model-output">Model output</a></li>
+  <li><a href="#hypothesis-test-for-beta_j" id="toc-hypothesis-test-for-beta_j" class="nav-link" data-scroll-target="#hypothesis-test-for-beta_j">Hypothesis test for <span class="math inline">\(\beta_j\)</span></a></li>
+  <li><a href="#confidence-interval-for-beta_j" id="toc-confidence-interval-for-beta_j" class="nav-link" data-scroll-target="#confidence-interval-for-beta_j">Confidence interval for <span class="math inline">\(\beta_j\)</span></a></li>
+  <li><a href="#interpretation-in-terms-of-the-odds" id="toc-interpretation-in-terms-of-the-odds" class="nav-link" data-scroll-target="#interpretation-in-terms-of-the-odds">Interpretation in terms of the odds</a></li>
+  <li><a href="#coefficient-for-age" id="toc-coefficient-for-age" class="nav-link" data-scroll-target="#coefficient-for-age">Coefficient for <code>age</code></a></li>
+  <li><a href="#coefficient-for-age-1" id="toc-coefficient-for-age-1" class="nav-link" data-scroll-target="#coefficient-for-age-1">Coefficient for <code>age</code></a></li>
+  <li><a href="#coefficient-for-age-2" id="toc-coefficient-for-age-2" class="nav-link" data-scroll-target="#coefficient-for-age-2">Coefficient for <code>age</code></a></li>
+  <li><a href="#coefficient-for-age-3" id="toc-coefficient-for-age-3" class="nav-link" data-scroll-target="#coefficient-for-age-3">Coefficient for <code>age</code></a></li>
+  </ul></li>
+  <li><a href="#comparing-models" id="toc-comparing-models" class="nav-link" data-scroll-target="#comparing-models">Comparing models</a>
+  <ul class="collapse">
+  <li><a href="#log-likelihood" id="toc-log-likelihood" class="nav-link" data-scroll-target="#log-likelihood">Log likelihood</a></li>
+  <li><a href="#comparing-nested-models" id="toc-comparing-nested-models" class="nav-link" data-scroll-target="#comparing-nested-models">Comparing nested models</a></li>
+  <li><a href="#drop-in-deviance-test" id="toc-drop-in-deviance-test" class="nav-link" data-scroll-target="#drop-in-deviance-test">Drop-in-deviance test</a></li>
+  <li><a href="#chi2-distribution" id="toc-chi2-distribution" class="nav-link" data-scroll-target="#chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</a></li>
+  <li><a href="#model-with-age-and-education" id="toc-model-with-age-and-education" class="nav-link" data-scroll-target="#model-with-age-and-education">Model with age and education</a></li>
+  <li><a href="#should-we-add-currentsmoker-to-the-model" id="toc-should-we-add-currentsmoker-to-the-model" class="nav-link" data-scroll-target="#should-we-add-currentsmoker-to-the-model">Should we add <code>currentSmoker</code> to the model?</a></li>
+  <li><a href="#should-we-add-currentsmoker-to-the-model-1" id="toc-should-we-add-currentsmoker-to-the-model-1" class="nav-link" data-scroll-target="#should-we-add-currentsmoker-to-the-model-1">Should we add <code>currentSmoker</code> to the model?</a></li>
+  <li><a href="#should-we-add-currentsmoker-to-the-model-2" id="toc-should-we-add-currentsmoker-to-the-model-2" class="nav-link" data-scroll-target="#should-we-add-currentsmoker-to-the-model-2">Should we add <code>currentSmoker</code> to the model?</a></li>
+  <li><a href="#drop-in-deviance-test-in-r" id="toc-drop-in-deviance-test-in-r" class="nav-link" data-scroll-target="#drop-in-deviance-test-in-r">Drop-in-Deviance test in R</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model selection</a></li>
+  <li><a href="#aic-from-the-glance-function" id="toc-aic-from-the-glance-function" class="nav-link" data-scroll-target="#aic-from-the-glance-function">AIC from the <code>glance()</code> function</a></li>
+  <li><a href="#comparing-the-models-using-aic" id="toc-comparing-the-models-using-aic" class="nav-link" data-scroll-target="#comparing-the-models-using-aic">Comparing the models using AIC</a></li>
+  <li><a href="#comparing-the-models-using-bic" id="toc-comparing-the-models-using-bic" class="nav-link" data-scroll-target="#comparing-the-models-using-bic">Comparing the models using BIC</a></li>
+  </ul></li>
+  <li><a href="#conditions" id="toc-conditions" class="nav-link" data-scroll-target="#conditions">Conditions</a>
+  <ul class="collapse">
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The model</a></li>
+  <li><a href="#conditions-for-logistic-regression" id="toc-conditions-for-logistic-regression" class="nav-link" data-scroll-target="#conditions-for-logistic-regression">Conditions for logistic regression</a></li>
+  <li><a href="#empirical-logit" id="toc-empirical-logit" class="nav-link" data-scroll-target="#empirical-logit">Empirical logit</a></li>
+  <li><a href="#calculating-empirical-logit-categorical-predictor" id="toc-calculating-empirical-logit-categorical-predictor" class="nav-link" data-scroll-target="#calculating-empirical-logit-categorical-predictor">Calculating empirical logit (categorical predictor)</a></li>
+  <li><a href="#calculating-empirical-logit-quantitative-predictor" id="toc-calculating-empirical-logit-quantitative-predictor" class="nav-link" data-scroll-target="#calculating-empirical-logit-quantitative-predictor">Calculating empirical logit (quantitative predictor)</a></li>
+  <li><a href="#empirical-logit-plot-in-r-quantitative-predictor" id="toc-empirical-logit-plot-in-r-quantitative-predictor" class="nav-link" data-scroll-target="#empirical-logit-plot-in-r-quantitative-predictor">Empirical logit plot in R (quantitative predictor)</a></li>
+  <li><a href="#empirical-logit-plot-in-r-interactions" id="toc-empirical-logit-plot-in-r-interactions" class="nav-link" data-scroll-target="#empirical-logit-plot-in-r-interactions">Empirical logit plot in R (interactions)</a></li>
+  <li><a href="#checking-linearity" id="toc-checking-linearity" class="nav-link" data-scroll-target="#checking-linearity">Checking linearity</a></li>
+  <li><a href="#checking-randomness" id="toc-checking-randomness" class="nav-link" data-scroll-target="#checking-randomness">Checking randomness</a></li>
+  <li><a href="#checking-independence" id="toc-checking-independence" class="nav-link" data-scroll-target="#checking-independence">Checking independence</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sta210-s22/website/edit/main/slides/lec-22.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sta210-s22/website/issues/new" class="toc-action">Report an issue</a></p></div></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec-22.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">LR: Inference + conditions</h1>
+<p class="subtitle lead">STA 210 - Spring 2022</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mine Çetinkaya-Rundel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="welcome" class="level1">
+<h1>Welcome</h1>
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<div class="nonincremental">
+<ul>
+<li>Bulding predictive logistic regression models</li>
+<li>Sensitivity and specificity</li>
+<li>Making classification decisions</li>
+</ul>
+</div>
+</section>
+<section id="computational-setup" class="level2">
+<h2 class="anchored" data-anchor-id="computational-setup">Computational setup</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openintro)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)  <span class="co"># for table embellishments</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)   <span class="co"># for empirical logit</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># set default theme and larger font size for ggplot2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<section id="risk-of-coronary-heart-disease" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="risk-of-coronary-heart-disease">Risk of coronary heart disease</h2>
+<p>This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease.</p>
+<ul>
+<li><p><code>high_risk</code>:</p>
+<ul>
+<li>1: High risk of having heart disease in next 10 years</li>
+<li>0: Not high risk of having heart disease in next 10 years</li>
+</ul></li>
+<li><p><code>age</code>: Age at exam time (in years)</p></li>
+<li><p><code>education</code>: 1 = Some High School, 2 = High School or GED, 3 = Some College or Vocational School, 4 = College</p></li>
+<li><p><code>currentSmoker</code>: 0 = nonsmoker, 1 = smoker</p></li>
+</ul>
+</section>
+<section id="data-prep" class="level2">
+<h2 class="anchored" data-anchor-id="data-prep">Data prep</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"slides"</span>, <span class="st">"data/framingham.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, education, TenYearCHD, totChol, currentSmoker) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">high_risk =</span> <span class="fu">as.factor</span>(TenYearCHD),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">education =</span> <span class="fu">as.factor</span>(education),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">currentSmoker =</span> <span class="fu">as.factor</span>(currentSmoker)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>heart_disease</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 4,086 × 6
+     age education TenYearCHD totChol currentSmoker high_risk
+   &lt;dbl&gt; &lt;fct&gt;          &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;    
+ 1    39 4                  0     195 0             0        
+ 2    46 2                  0     250 0             0        
+ 3    48 1                  0     245 1             0        
+ 4    61 3                  1     225 1             1        
+ 5    46 3                  0     285 1             0        
+ 6    43 2                  0     228 0             0        
+ 7    63 1                  1     205 0             1        
+ 8    45 2                  0     313 1             0        
+ 9    52 1                  0     260 0             0        
+10    43 1                  0     225 1             0        
+# … with 4,076 more rows</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="inference-for-a-model" class="level1">
+<h1>Inference for a model</h1>
+<section id="modeling-risk-of-coronary-heart-disease" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-risk-of-coronary-heart-disease">Modeling risk of coronary heart disease</h2>
+<p>From age and education:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>risk_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-output" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-output">Model output</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(risk_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"markdown"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.076</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">13.648</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math display">\[
+\small{\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.385 + 0.073 ~ \text{age} - 0.242 ~ \text{ed2} - 0.235 ~ \text{ed3} - 0.020 ~ \text{ed4}}
+\]</span></p>
+</section>
+<section id="hypothesis-test-for-beta_j" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test-for-beta_j">Hypothesis test for <span class="math inline">\(\beta_j\)</span></h2>
+<p><strong>Hypotheses:</strong> <span class="math inline">\(H_0: \beta_j = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_j \neq 0\)</span></p>
+<p>. . .</p>
+<p><strong>Test Statistic:</strong> <span class="math display">\[z = \frac{\hat{\beta}_j - 0}{SE_{\hat{\beta}_j}}\]</span></p>
+<p>. . .</p>
+<p><strong>P-value:</strong> <span class="math inline">\(P(|Z| &gt; |z|)\)</span>, where <span class="math inline">\(Z \sim N(0, 1)\)</span>, the Standard Normal distribution</p>
+</section>
+<section id="confidence-interval-for-beta_j" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-beta_j">Confidence interval for <span class="math inline">\(\beta_j\)</span></h2>
+<p>We can calculate the .vocab[C% confidence interval] for <span class="math inline">\(\beta_j\)</span> as the following:</p>
+<p><span class="math display">\[
+\Large{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}
+\]</span></p>
+<p>where <span class="math inline">\(z^*\)</span> is calculated from the <span class="math inline">\(N(0,1)\)</span> distribution</p>
+<p>. . .</p>
+<p>This is an interval for the change in the log-odds for every one unit increase in <span class="math inline">\(x_j\)</span>.</p>
+</section>
+<section id="interpretation-in-terms-of-the-odds" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-in-terms-of-the-odds">Interpretation in terms of the odds</h2>
+<p>The change in <strong>odds</strong> for every one unit increase in <span class="math inline">\(x_j\)</span>.</p>
+<p><span class="math display">\[
+\Large{e^{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}}
+\]</span></p>
+<p>. . .</p>
+<p><strong>Interpretation:</strong> We are <span class="math inline">\(C\%\)</span> confident that for every one unit increase in <span class="math inline">\(x_j\)</span>, the odds multiply by a factor of <span class="math inline">\(e^{\hat{\beta}_j - z^* SE_{\hat{\beta}_j}}\)</span> to <span class="math inline">\(e^{\hat{\beta}_j + z^* SE_{\hat{\beta}_j}}\)</span>, holding all else constant.</p>
+</section>
+<section id="coefficient-for-age" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="coefficient-for-age">Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: #D9E3E4 !important;">age</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.076</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.006</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">13.648</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.000</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.065</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>. . .</p>
+<p><strong>Hypotheses:</strong></p>
+<p><span class="math display">\[
+H_0: \beta_{1} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{1} \neq 0
+\]</span></p>
+</section>
+<section id="coefficient-for-age-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="coefficient-for-age-1">Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: #D9E3E4 !important;">age</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.076</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.006</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">13.648</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.000</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.065</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Test statistic:</strong></p>
+<p><span class="math display">\[
+z = \frac{0.0733 - 0}{0.00547} = 13.4
+\]</span></p>
+</section>
+<section id="coefficient-for-age-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="coefficient-for-age-2">Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: #D9E3E4 !important;">age</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.076</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.006</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">13.648</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.000</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.065</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>P-value:</strong></p>
+<p><span class="math display">\[
+P(|Z| &gt; |13.4|) \approx 0
+\]</span></p>
+<p>. . .</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="fl">13.4</span>,<span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 6.046315e-41</code></pre>
+</div>
+</div>
+</section>
+<section id="coefficient-for-age-3" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="coefficient-for-age-3">Coefficient for <code>age</code></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: #D9E3E4 !important;">age</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.076</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.006</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">13.648</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.000</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.065</td>
+<td style="text-align: right; background-color: #D9E3E4 !important;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Conclusion:</strong></p>
+<p>The p-value is very small, so we reject <span class="math inline">\(H_0\)</span>. The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, <em>after accounting for education</em>.</p>
+</section>
+</section>
+<section id="comparing-models" class="level1">
+<h1>Comparing models</h1>
+<section id="log-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="log-likelihood">Log likelihood</h2>
+<p><span class="math display">\[
+\log L = \sum\limits_{i=1}^n[y_i \log(\hat{\pi}_i) + (1 - y_i)\log(1 - \hat{\pi}_i)]
+\]</span></p>
+<ul>
+<li><p>Measure of how well the model fits the data</p></li>
+<li><p>Higher values of <span class="math inline">\(\log L\)</span> are better</p></li>
+<li><p><strong>Deviance</strong> = <span class="math inline">\(-2 \log L\)</span></p>
+<ul>
+<li><span class="math inline">\(-2 \log L\)</span> follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n - p - 1\)</span> degrees of freedom</li>
+</ul></li>
+</ul>
+</section>
+<section id="comparing-nested-models" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-nested-models">Comparing nested models</h2>
+<ul>
+<li><p>Suppose there are two models:</p>
+<ul>
+<li>Reduced Model includes predictors <span class="math inline">\(x_1, \ldots, x_q\)</span></li>
+<li>Full Model includes predictors <span class="math inline">\(x_1, \ldots, x_q, x_{q+1}, \ldots, x_p\)</span></li>
+</ul></li>
+<li><p>We want to test the hypotheses</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0&amp;: \beta_{q+1} = \dots = \beta_p = 0 \\
+H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
+\end{aligned}
+\]</span></p></li>
+<li><p>To do so, we will use the <strong>Drop-in-deviance test</strong>, also known as the Nested Likelihood Ratio test</p></li>
+</ul>
+</section>
+<section id="drop-in-deviance-test" class="level2">
+<h2 class="anchored" data-anchor-id="drop-in-deviance-test">Drop-in-deviance test</h2>
+<p><strong>Hypotheses:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0&amp;: \beta_{q+1} = \dots = \beta_p = 0 \\
+H_A&amp;: \text{ at least 1 }\beta_j \text{ is not } 0
+\end{aligned}
+\]</span></p>
+<p>. . .</p>
+<p><strong>Test Statistic:</strong> <span class="math display">\[G = (-2 \log L_{reduced}) - (-2 \log L_{full})\]</span></p>
+<p>. . .</p>
+<p><strong>P-value:</strong> <span class="math inline">\(P(\chi^2 &gt; G)\)</span>, calculated using a <span class="math inline">\(\chi^2\)</span> distribution with degrees of freedom equal to the difference in the number of parameters in the full and reduced models</p>
+</section>
+<section id="chi2-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="chi2-distribution"><span class="math inline">\(\chi^2\)</span> distribution</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-22_files/figure-revealjs/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-with-age-and-education" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="model-with-age-and-education">Model with age and education</h2>
+<div class="question">
+<p>Should we add <code>currentSmoker</code> to this model?</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-5.508</td>
+<td style="text-align: right;">0.311</td>
+<td style="text-align: right;">-17.692</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-6.125</td>
+<td style="text-align: right;">-4.904</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.076</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">13.648</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education2</td>
+<td style="text-align: right;">-0.245</td>
+<td style="text-align: right;">0.113</td>
+<td style="text-align: right;">-2.172</td>
+<td style="text-align: right;">0.030</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">-0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education3</td>
+<td style="text-align: right;">-0.236</td>
+<td style="text-align: right;">0.135</td>
+<td style="text-align: right;">-1.753</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">-0.504</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">education4</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">-0.161</td>
+<td style="text-align: right;">0.872</td>
+<td style="text-align: right;">-0.323</td>
+<td style="text-align: right;">0.264</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="should-we-add-currentsmoker-to-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="should-we-add-currentsmoker-to-the-model">Should we add <code>currentSmoker</code> to the model?</h2>
+<p>First model, reduced:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>risk_fit_reduced <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p>Second model, full:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>risk_fit_full <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> education <span class="sc">+</span> currentSmoker, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="should-we-add-currentsmoker-to-the-model-1" class="level2">
+<h2 class="anchored" data-anchor-id="should-we-add-currentsmoker-to-the-model-1">Should we add <code>currentSmoker</code> to the model?</h2>
+<p>Calculate deviance for each model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(dev_reduced <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3244.187</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(dev_full <span class="ot">&lt;-</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>deviance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3221.901</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<p>Drop-in-deviance test statistic:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(test_stat <span class="ot">&lt;-</span> dev_reduced <span class="sc">-</span> dev_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 22.2863</code></pre>
+</div>
+</div>
+</section>
+<section id="should-we-add-currentsmoker-to-the-model-2" class="level2">
+<h2 class="anchored" data-anchor-id="should-we-add-currentsmoker-to-the-model-2">Should we add <code>currentSmoker</code> to the model?</h2>
+<p>Calculate the p-value using a <code>pchisq()</code>, with degrees of freedom equal to the number of new model terms in the second model:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(test_stat, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 2.348761e-06</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<p><strong>Conclusion:</strong> The p-value is very small, so we reject <span class="math inline">\(H_0\)</span>. The data provide sufficient evidence that the coefficient of <code>currentSmoker</code> is not equal to 0. Therefore, we should add it to the model.</p>
+</section>
+<section id="drop-in-deviance-test-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="drop-in-deviance-test-in-r">Drop-in-Deviance test in R</h2>
+<ul>
+<li><p>We can use the <strong><code>anova</code></strong> function to conduct this test</p></li>
+<li><p>Add <strong><code>test = "Chisq"</code></strong> to conduct the drop-in-deviance test</p></li>
+</ul>
+<p>. . .</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(risk_fit_reduced<span class="sc">$</span>fit, risk_fit_full<span class="sc">$</span>fit, <span class="at">test =</span> <span class="st">"Chisq"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  Resid..Df Resid..Dev    df Deviance     p.value
+      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+1      4081      3244.    NA     NA   NA         
+2      4080      3222.     1     22.3  0.00000235</code></pre>
+</div>
+</div>
+</section>
+<section id="model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection">Model selection</h2>
+<p>Use AIC or BIC for model selection</p>
+<p><span class="math display">\[
+\begin{align}
+&amp;AIC = - 2 * \log L - \color{purple}{n\log(n)}+ 2(p +1)\\[5pt]
+&amp;BIC =- 2 * \log L - \color{purple}{n\log(n)} + log(n)\times(p+1)
+\end{align}
+\]</span></p>
+</section>
+<section id="aic-from-the-glance-function" class="level2">
+<h2 class="anchored" data-anchor-id="aic-from-the-glance-function">AIC from the <code>glance()</code> function</h2>
+<p>Let’s look at the AIC for the model that includes <code>age</code>, <code>education</code>, and <code>currentSmoker</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3233.901</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<p><strong>Calculating AIC</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>logLik <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3233.901</code></pre>
+</div>
+</div>
+</section>
+<section id="comparing-the-models-using-aic" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-models-using-aic">Comparing the models using AIC</h2>
+<p>Let’s compare the full and reduced models using AIC.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3254.187</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>AIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3233.901</code></pre>
+</div>
+</div>
+<div class="question">
+<p>Based on AIC, which model would you choose?</p>
+</div>
+</section>
+<section id="comparing-the-models-using-bic" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-models-using-bic">Comparing the models using BIC</h2>
+<p>Let’s compare the full and reduced models using BIC</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(risk_fit_reduced)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3285.764</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(risk_fit_full)<span class="sc">$</span>BIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 3271.793</code></pre>
+</div>
+</div>
+<div class="question">
+<p>Based on BIC, which model would you choose?</p>
+</div>
+</section>
+</section>
+<section id="conditions" class="level1">
+<h1>Conditions</h1>
+<section id="the-model" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-model">The model</h2>
+<p>Let’s predict <code>high_risk</code> from age, total cholesterol, and whether the patient is a current smoker:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>risk_fit <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> totChol <span class="sc">+</span> currentSmoker, </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> heart_disease, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(risk_fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p.value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.low</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-6.673</td>
+<td style="text-align: right;">0.378</td>
+<td style="text-align: right;">-17.647</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-7.423</td>
+<td style="text-align: right;">-5.940</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.082</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">14.344</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">0.094</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">totChol</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">1.940</td>
+<td style="text-align: right;">0.052</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.004</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">currentSmoker1</td>
+<td style="text-align: right;">0.443</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">4.733</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.260</td>
+<td style="text-align: right;">0.627</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="conditions-for-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="conditions-for-logistic-regression">Conditions for logistic regression</h2>
+<ol type="1">
+<li><p><strong>Linearity:</strong> The log-odds have a linear relationship with the predictors.</p></li>
+<li><p><strong>Randomness:</strong> The data were obtained from a random process</p></li>
+<li><p><strong>Independence:</strong> The observations are independent from one another.</p></li>
+</ol>
+</section>
+<section id="empirical-logit" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-logit">Empirical logit</h2>
+<p>The <strong>empirical logit</strong> is the log of the observed odds:</p>
+<p><span class="math display">\[
+\text{logit}(\hat{p}) = \log\Big(\frac{\hat{p}}{1 - \hat{p}}\Big) = \log\Big(\frac{\# \text{Yes}}{\# \text{No}}\Big)
+\]</span></p>
+</section>
+<section id="calculating-empirical-logit-categorical-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-empirical-logit-categorical-predictor">Calculating empirical logit (categorical predictor)</h2>
+<p>If the predictor is categorical, we can calculate the empirical logit for each level of the predictor.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(currentSmoker, high_risk) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(currentSmoker) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(high_risk <span class="sc">==</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emp_logit =</span> <span class="fu">log</span>(prop<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>prop)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+# Groups:   currentSmoker [2]
+  currentSmoker high_risk     n  prop emp_logit
+  &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;
+1 0             1           301 0.145     -1.77
+2 1             1           318 0.158     -1.67</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-empirical-logit-quantitative-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-empirical-logit-quantitative-predictor">Calculating empirical logit (quantitative predictor)</h2>
+<ol type="1">
+<li><p>Divide the range of the predictor into intervals with approximately equal number of cases. (If you have enough observations, use 5 - 10 intervals.)</p></li>
+<li><p>Calculate the mean value of the predictor in each interval.</p></li>
+<li><p>Compute the empirical logit for each interval.</p></li>
+</ol>
+<p>. . .</p>
+<p>Then, create a plot of the empirical logit versus the mean value of the predictor in each interval.</p>
+</section>
+<section id="empirical-logit-plot-in-r-quantitative-predictor" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-logit-plot-in-r-quantitative-predictor">Empirical logit plot in R (quantitative predictor)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> age, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-22_files/figure-revealjs/unnamed-chunk-26-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="empirical-logit-plot-in-r-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-logit-plot-in-r-interactions">Empirical logit plot in R (interactions)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emplogitplot2</span>(high_risk <span class="sc">~</span> age <span class="sc">+</span> currentSmoker, <span class="at">data =</span> heart_disease, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">putlegend =</span> <span class="st">"bottomright"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-22_files/figure-revealjs/unnamed-chunk-27-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-linearity" class="level2">
+<h2 class="anchored" data-anchor-id="checking-linearity">Checking linearity</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> age, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-22_files/figure-revealjs/unnamed-chunk-28-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emplogitplot1</span>(high_risk <span class="sc">~</span> totChol, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> heart_disease, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ngroups =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec-22_files/figure-revealjs/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p>✅ The linearity condition is satisfied. There is a linear relationship between the empirical logit and the predictor variables.</p>
+</section>
+<section id="checking-randomness" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="checking-randomness">Checking randomness</h2>
+<p>We can check the randomness condition based on the context of the data and how the observations were collected.</p>
+<ul>
+<li>Was the sample randomly selected?</li>
+<li>If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest.</li>
+</ul>
+<p>. . .</p>
+<p>✅ The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S. in regards to health characteristics and risk of heart disease.</p>
+</section>
+<section id="checking-independence" class="level2">
+<h2 class="anchored" data-anchor-id="checking-independence">Checking independence</h2>
+<ul>
+<li>We can check the independence condition based on the context of the data and how the observations were collected.</li>
+<li>Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations.</li>
+</ul>
+<p>. . .</p>
+<p>✅ The independence condition is satisfied. It is reasonable to conclude that the participants’ health characteristics are independent of one another.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    function fireSlideChanged(previousSlide, currentSlide) {
+
+      // dispatch for htmlwidgets
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for reveal
+    if (window.Reveal) {
+      window.Reveal.addEventListener("slidechanged", function(event) {
+        fireSlideChanged(event.previousSlide, event.currentSlide);
+      });
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© Copyright 2022, Mine Çetinkaya-Rundel</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

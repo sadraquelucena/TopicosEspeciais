@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ESTAT0016 - Tópicos Especiais em Estatística",
+    "section": "",
+    "text": "Esta página foi criada para a disciplina Tópicos Especiais em Estatística no semestre 2023-2, cujo conteúdo é Introdução à aprendizagem de máquina. Esta disciplina é ofertada pelo Departamento de Estatística e Ciências Atuariais da Universidade Federal de Sergipe.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nPrepare\nSlides\nAE\nLab\nHW\nExam\nProject\n\n\n\n\n1\nWed, Jan 5\nLab 0 - Meet + greet\n\n🖥️\n\n💻\n\n\n\n\n\n\nThu, Jan 6\nWelcome to STA 210!\n📖\n🖥️\n📋\n\n\n\n\n\n\n2\nMon, Jan 10\nLab 1 - Meet the toolkit\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 11\nSimple linear regression (SLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 13\nSLR: Model fitting in R with tidymodels\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 14\nReleased: HW 5\n\n\n\n\n✍️\n\n\n\n\n\n\nDue: Lab 1\n\n\n\n💻 🗝️\n\n\n\n\n\n3\nMon, Jan 17\nMartin Luther King, Jr. Day\n\n\n\n\n\n\n\n\n\n\nTue, Jan 18\nSLR: Prediction + model evaluation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Jan 20\nSLR: Simulation-based inference\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Jan 21\nReleased: HW 1\n\n\n\n\n✍️\n\n\n\n\n4\nMon, Jan 24\nLab 2 - College scorecard\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Jan 25\nSLR: Mathematical models for inference\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Jan 27\nSLR: Model diagnostics\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Jan 28\nDue: HW 1 + Lab 2\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n5\nMon, Jan 31\nLab 3 - Coffee ratings\n\n🖥️\n\n💻\n\n\n\n\n\n\nTue, Feb 1\nMultiple linear regression (MLR)\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 3\nExam 1 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 4\nReleased: Exam 1\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 3\n\n\n\n💻 🗝️\n\n\n\n\n\n6\nMon, Feb 7\nNo lab: Work on Exam 1\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 1\n\n\n\n\n\n✅\n\n\n\n\nTue, Feb 8\nMLR: Types of predictors\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Feb 10\nMLR: Model comparison\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 11\nReleased: HW 2\n\n\n\n\n✍️\n\n\n\n\n7\nMon, Feb 14\nLab: Project topic ideas\n\n\n\n\n\n\n📂\n\n\n\nTue, Feb 15\nMLR: Feature engineering\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 17\nMLR: Feature engineering\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Feb 18\nDue: HW 2 + Project topic ideas\n\n\n\n\n✍️ 🗝️\n\n📂\n\n\n8\nMon, Feb 21\nLab 4: The Office\n\n\n\n💻\n\n\n\n\n\n\nTue, Feb 22\nMLR: Cross validation\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Feb 24\nExam 2 review\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Feb 25\nReleased: Exam 2\n\n\n\n\n\n✅\n\n\n\n\n\nDue: Lab 4\n\n\n\n💻 🗝️\n\n\n\n\n\n9\nMon, Feb 28\nNo lab: Work on Exam 2\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 2\n\n\n\n\n\n✅\n\n\n\n\nTue, Mar 1\nMLR: Inference\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 3\nMLR: Inference conditions + multicollinearity\n\n🖥️\n\n\n\n\n\n\n\n\nMon, Mar 7\nSpring break\n\n\n\n\n\n\n\n\n\n\nTue, Mar 8\nSpring break\n\n\n\n\n\n\n\n\n\n\nThu, Mar 10\nSpring break\n\n\n\n\n\n\n\n\n\n10\nMon, Mar 14\nLab: Work on project proposals\n\n\n\n\n\n\n📂\n\n\n\nTue, Mar 15\nLogistic regression (LR)\n📖\n🖥️\n📋\n\n\n\n\n\n\n\nThu, Mar 17\nProbabilities, odds, and odds ratios\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Mar 18\nDue: Project proposals\n\n\n\n\n\n\n📂\n\n\n\n\nReleased: HW 3\n\n\n\n\n✍️\n\n\n\n\n11\nMon, Mar 21\nLab 5: General Social Survey\n\n\n\n💻\n\n\n\n\n\n\nTue, Mar 22\nLR: Prediction / classification\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 24\nLR: Model comparison\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Mar 25\nDue: HW 3 + Lab 5\n\n\n\n💻 🗝️\n✍️ 🗝️\n\n\n\n\n12\nMon, Mar 28\nLab: Work on project drafts\n\n\n\n\n\n\n📂\n\n\n\nTue, Mar 29\nLR: Inference + conditions\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Mar 31\nMultinomial Logistic Regression (MultiLR)\n\n🖥️\n\n\n\n\n\n\n\n\nFri, Apr 1\nReleased: HW 4\n\n\n\n\n✍️\n\n\n\n\n13\nMon, Apr 4\nLab 6: Why Many Americans Don’t Vote\n\n\n\n💻\n\n\n\n\n\n\nTue, Apr 5\nMultiLR: Prediction + inferential models\n📖\n🖥️\n\n\n\n\n\n\n\n\nThu, Apr 7\nMultiLR: Predictive models\n\n🖥️\n📋\n\n\n\n\n\n\n\nFri, Apr 8\nDue: Lab 6\n\n\n\n💻 🗝️\n\n\n\n\n\n\nSun, Apr 10\nDue: Project drafts\n\n\n\n\n\n\n📂\n\n\n14\nMon, Apr 11\nLab: Project peer review of drafts\n\n\n\n\n\n\n📂\n\n\n\nTue, Apr 12\nMultiLR: Predictive models (cont.)\n📖\n🖥️\n\n\n\n\n\n\n\n\n\nDue: HW 4\n\n\n\n\n✍️ 🗝️\n\n\n\n\n\nThu, Apr 14\nExam 3 review\n\n🖥️\n📋\n\n\n\n\n\n\n\n\nDue: Peer review\n\n\n\n\n\n\n📂\n\n\n\nFri, Apr 15\nReleased: Exam 3\n\n\n\n\n\n✅\n\n\n\n15\nMon, Apr 18\nNo lab: Work on Exam 3\n\n\n\n\n\n\n\n\n\n\n\nDue: Exam 3\n\n\n\n\n\n✅\n\n\n\n\nTue, Apr 19\nWrap-up\n📖\n🖥️\n📋\n\n\n\n\n\n\n\n\nDue: HW 5\n\n\n\n\n✍️\n\n\n\n\n16\nMon, Apr 25\nDue: Project write-up\n\n\n\n\n\n\n📂\n\n\n\nThu, Apr 28\nDue: Video presentation + repo\n\n\n\n\n\n\n📂\n\n\n\nSat, Apr 30\nDue: Video comments\n\n\n\n\n\n\n📂"
+  },
+  {
+    "objectID": "sobre.html",
+    "href": "sobre.html",
+    "title": "Sobre o curso",
+    "section": "",
+    "text": "Componente curricular: ESTAT0016 – Tópicos Especiais em Estatística (Introdução à aprendizagem de máquina)\nProfessor responsável: Dr. Sadraque E. F. Lucena\nCarga horária: 60 horas (4 créditos)\nHorário:\n\nSegundas – 17h00 às 18h50\nQuintas – 17h00 às 18h50\n\nLocal: Laboratório do Informática do DECAT\nTipo de componente: Disciplina\nUnidade Responsável: Departamento de Estatística e Ciências Atuariais (DECAT)\nPeríodo letivo: 2023-2\nQuantidade de avaliações: 2"
+  },
+  {
+    "objectID": "sobre.html#dados",
+    "href": "sobre.html#dados",
+    "title": "Sobre o curso",
+    "section": "",
+    "text": "Componente curricular: ESTAT0016 – Tópicos Especiais em Estatística (Introdução à aprendizagem de máquina)\nProfessor responsável: Dr. Sadraque E. F. Lucena\nCarga horária: 60 horas (4 créditos)\nHorário:\n\nSegundas – 17h00 às 18h50\nQuintas – 17h00 às 18h50\n\nLocal: Laboratório do Informática do DECAT\nTipo de componente: Disciplina\nUnidade Responsável: Departamento de Estatística e Ciências Atuariais (DECAT)\nPeríodo letivo: 2023-2\nQuantidade de avaliações: 2"
+  },
+  {
+    "objectID": "sobre.html#ementa",
+    "href": "sobre.html#ementa",
+    "title": "Sobre o curso",
+    "section": "Ementa",
+    "text": "Ementa\nPré-processamento de dados. Aprendizado supervisionado. Regressão. Classificação. \\(k\\)-Nearest Neighbors. Na”ive Bayes. Árvores de Decisão. Florestas aleatórias. Avaliação de desempenho. Validação Cruzada. Métricas de desempenho de Classificação. Ajuste de parâmetros. Bagging, Boosting e Stacking. Aprendizado não supervisionado. Regras de Associação. \\(k\\)-means."
+  },
+  {
+    "objectID": "sobre.html#objetivos",
+    "href": "sobre.html#objetivos",
+    "title": "Sobre o curso",
+    "section": "Objetivos",
+    "text": "Objetivos\nIntroduzir os conceitos fundamentais e técnicas da aprendizagem de máquina."
+  },
+  {
+    "objectID": "sobre.html#metodologia",
+    "href": "sobre.html#metodologia",
+    "title": "Sobre o curso",
+    "section": "Metodologia",
+    "text": "Metodologia\nSerão ministradas aulas teóricas expositivas; utilizados recursos visuais e computacionais; aplicação dos métodos em sala de aula; solicitação de atividades extraclasse."
+  },
+  {
+    "objectID": "sobre.html#habilidades-e-competências",
+    "href": "sobre.html#habilidades-e-competências",
+    "title": "Sobre o curso",
+    "section": "Habilidades e Competências",
+    "text": "Habilidades e Competências\nNo final deste curso, os(as) alunos(as) deverão estar equipa dos(as) com as habilidades e o entendimento necessários para aplicar a aprendizagem de máquina em diversos contextos, preparando-os(as) para carreiras em estatística, ciência de dados, inteligência artificial e análise de dados."
+  },
+  {
+    "objectID": "sobre.html#avaliação",
+    "href": "sobre.html#avaliação",
+    "title": "Sobre o curso",
+    "section": "Avaliação",
+    "text": "Avaliação\nSerá realizada uma avaliação contı́nua, com solicitação de atividades extraclasse e apresentações em sala de aula. Duas avaliações também serão realizadas ao longo do semestre."
+  },
+  {
+    "objectID": "sobre.html#conteúdo",
+    "href": "sobre.html#conteúdo",
+    "title": "Sobre o curso",
+    "section": "Conteúdo",
+    "text": "Conteúdo\n\nPré-processamento de Dados\n\nExploração\nLimpeza\nTransformação\nRedução\n\nAprendizado Supervisionado\n\nRegressão\n\nRegressão linear\nRegressão logı́stica\n\n\\(k\\)-Nearest Neighbors\nNaı̈ve Baye\nÁrvores de Decisão\nFlorestas aleatórias\nAvaliação de desempenho\n\nValidação Cruzada\nAmostragem bootstrap\nAcurácia\nKappa\nPrecisão e revocação\nSensibilidade e especificidade\n\nAjuste de parâmetros\nMétodos de conjunto (ensemble methods)\n\nBagging\nBoosting\nStacking\n\n\nAprendizado Não Supervisionado\n\nRegras de Associação\n\\(k\\)-means"
+  },
+  {
+    "objectID": "sobre.html#bibliografia",
+    "href": "sobre.html#bibliografia",
+    "title": "Sobre o curso",
+    "section": "Bibliografia",
+    "text": "Bibliografia\n\nBásica\nFACELI, Katti. Inteligência artificial: uma abordagem de aprendizado de máquina. Rio de Janeiro: LTC, 2011. 378 p.\nIZBICKI, Rafael; DOS SANTOS, Tiago Mendonça. Aprendizado de máquina: uma abordagem estatı́stica [livro eletrônico]. São Carlos: Rafael Izbicki, 2020.\nNWANGANGA, Fred; CHAPPLE, Mike. Practical machine learning in R. Indianapolis: John Wiley & Sons, 2020.\nABU-MOSTAFA, Yaser S.; MAGDON-ISMAIL, Malik; LIN, Hsuan-Tien. Learning from data. New York: AMLBook, 2012.\nHASTIE, Trevor et al. The elements of statistical learning: data mining, inference, and prediction. New York: springer, 2009.\n\n\nComplementar\nRAMASUBRAMANIAN, Karthik; SINGH, Abhishek. Machine learning using R. New Delhi, India: Apress, 2017.\nLANTZ, Brett. Machine learning with R: expert techniques for predictive modeling. Packt publishing ltd, 2019."
+  },
+  {
+    "objectID": "material.html",
+    "href": "material.html",
+    "title": "Material",
+    "section": "",
+    "text": "Slides-01: html pdf\nSlides-02: html pdf"
+  },
+  {
+    "objectID": "material.html#slides",
+    "href": "material.html#slides",
+    "title": "Material",
+    "section": "",
+    "text": "Slides-01: html pdf\nSlides-02: html pdf"
+  },
+  {
+    "objectID": "material.html#códigos-em-r",
+    "href": "material.html#códigos-em-r",
+    "title": "Material",
+    "section": "Códigos em R",
+    "text": "Códigos em R"
+  }
+]

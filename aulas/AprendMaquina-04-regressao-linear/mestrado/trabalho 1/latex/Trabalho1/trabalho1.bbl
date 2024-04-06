@@ -1,0 +1,102 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Bailey et~al.]{Bailey, Muth \harvardand\ Nourse}{1963}{Bailey1963}
+Bailey, M.~J., Muth, R.~F. \harvardand\ Nourse, H.~O.  \harvardyearleft
+  1963\harvardyearright , `A regression method for real estate price index
+  construction', {\em Journal of the American Statistical Association} {\bf
+  58}(304),~933--942.
+
+\harvarditem{Box \harvardand\ Cox}{1964}{boxcox1964}
+Box, G. \harvardand\ Cox, D.  \harvardyearleft 1964\harvardyearright , `An
+  analysis of tranformations', {\em Journal of the Royal Statistical Society}
+  {\bf 26},~211--252.
+
+\harvarditem{Breusch \harvardand\ Pagan}{1979}{pagan1979}
+Breusch, T. \harvardand\ Pagan, A.  \harvardyearleft 1979\harvardyearright ,
+  `Simple test for heteroscedasticity and random coefficient variation', {\em
+  Econometrica} {\bf 47},~1287--1294.
+
+\harvarditem{{Cribari-Neto}}{2004}{cribari2004}
+{Cribari-Neto}, F.  \harvardyearleft 2004\harvardyearright , `Asymptotic
+  inference under heteroscedasticity of unknown form', {\em Computational
+  Statistics \& Data Analysis} {\bf 45},~215--233.
+
+\harvarditem[{Cribari-Neto} et~al.]{{Cribari-Neto}, Souza \harvardand\
+  Vasconcellos}{2007}{cribari2007}
+{Cribari-Neto}, F., Souza, T. \harvardand\ Vasconcellos, K.  \harvardyearleft
+  2007\harvardyearright , `Inference under heteroscedasticity and leveraged
+  data', {\em Comunications in Statistics, Theory and Methods} {\bf
+  36},~1877--1888.
+
+\harvarditem{Dantas}{1998}{dantas1998}
+Dantas, R.~A.  \harvardyearleft 1998\harvardyearright , {\em Engenharia de
+  avaliações}, Pini, São Paulo.
+
+\harvarditem{Davidson \harvardand\ MacKinnon}{1993}{davidson1993}
+Davidson, R. \harvardand\ MacKinnon, J.  \harvardyearleft 1993\harvardyearright
+  , `Estimation and inference in econometrics', {\em New York: Oxford
+  University Press} .
+
+\harvarditem{Draper \harvardand\ Smith}{1998}{draper1998}
+Draper, N.~R. \harvardand\ Smith, H.  \harvardyearleft 1998\harvardyearright ,
+  {\em Applied regression analysis}, Vol.~3.
+
+\harvarditem{Isakson}{2001}{isakson2001}
+Isakson, H.~R.  \harvardyearleft 2001\harvardyearright , `Using multiple
+  regression analysis in real estate appraisal', {\em Appraisal Journal} {\bf
+  69}(4),~424--430.
+
+\harvarditem{J.B.Ramsey}{1969}{ramsey1969}
+J.B.Ramsey  \harvardyearleft 1969\harvardyearright , `Tests for specification
+  errors in classical linear least squares regression analysis', {\em Journal
+  of the Royal Statistical Society} {\bf 31},~350--371.
+
+\harvarditem{Koenker}{1981}{koenker1981}
+Koenker, R.  \harvardyearleft 1981\harvardyearright , `A note on studentizing a
+  test got heteroscedasticity.', {\em Jornal of Econometrics} {\bf
+  17},~107--112.
+
+\harvarditem{MacKinnon \harvardand\ White}{1985}{white1985}
+MacKinnon, J. \harvardand\ White, H.  \harvardyearleft 1985\harvardyearright ,
+  `Some heteroscedasticity-consistent covariance matrix estimators with
+  improved finite-sample properties', {\em Jor} {\bf 29},~305--325.
+
+\harvarditem[Montgo\-mery et~al.]{Montgo\-mery, Peck \harvardand\
+  Vining}{2006}{montgomery2006}
+Montgo\-mery, D.~C., Peck, E.~A. \harvardand\ Vining, G.~G.  \harvardyearleft
+  2006\harvardyearright , {\em Introduction to linear regression analysis}, 4th
+  edn.
+
+\harvarditem[Moreira et~al.]{Moreira, dos Santos~Silva \harvardand\
+  da~Rocha~Fernandes}{2010}{moreira2010}
+Moreira, D.~S., dos Santos~Silva, R. \harvardand\ da~Rocha~Fernandes, A.~M.
+  \harvardyearleft 2010\harvardyearright , `Engenharia de avaliações de imóveis
+  apoiada em técnicas de análise multicritério e redes neurais artificiais',
+  {\em Revista de Sistemas de Informação da FSMA} {\bf 6},~49--58.
+
+\harvarditem{Rams\-land \harvardand\ Markham}{1998}{ramsland1998}
+Rams\-land, M.~O. \harvardand\ Markham, D.~E.  \harvardyearleft
+  1998\harvardyearright , `Market-supported adjustments using multiple
+  regression analysis', {\em Appraisal Journal} {\bf 66}(2),~181--191.
+
+\harvarditem{Schwarz}{1978}{Schwarz1978}
+Schwarz, G.  \harvardyearleft 1978\harvardyearright , `Estimating the dimension
+  of a model', {\em Annals of Statistics} {\bf 6},~461--464.
+
+\harvarditem[Steiner et~al.]{Steiner, Neto, Braulio \harvardand\
+  Alves}{2008}{Steiner2008}
+Steiner, M. T.~A., Neto, A.~C., Braulio, S.~N. \harvardand\ Alves, V.
+  \harvardyearleft 2008\harvardyearright , `Métodos estatísticos multivariados
+  aplicados à engenharia de avaliações', {\em Gest. Prod.} {\bf 15}(1),~23--32.
+
+\harvarditem{Thadewald \harvardand\ Büning}{2004}{bunig2004}
+Thadewald, T. \harvardand\ Büning, H.  \harvardyearleft 2004\harvardyearright ,
+  `Jarque-bera test and its competitors for testing normality - a power
+  comparison', {\em Institute for Statistics and Econometrics} .
+
+\harvarditem{White}{1980}{white1980}
+White, H.  \harvardyearleft 1980\harvardyearright , `A
+  heteroskedasticity-consistent covariance matrix estimator and a direct test
+  for heteroskedasticity', {\em Econometrica} {\bf 48 (4)},~817--838.
+
+\end{thebibliography}

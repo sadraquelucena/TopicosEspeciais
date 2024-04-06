@@ -151,7 +151,7 @@ editor: source
 
 -   A dimensionalidade de um conjunto de dados representa o número de atributos.
 
--   Quanto maior a dimensionalidade do conjunto de dados, mais detalhes temso sobre os dados, mas também aumenta a complexidade computacional e o consumo de recursos.
+-   Quanto maior a dimensionalidade do conjunto de dados, mais detalhes temos sobre os dados, mas também aumenta a complexidade computacional e o consumo de recursos.
 
 -   Posteriormente, discutiremos algumas abordagens para reduzir a dimensionalidade de um conjunto de dados, a fim de facilitar o trabalho com aprendizado de máquina.
 
@@ -181,7 +181,7 @@ editor: source
 
 -   A estatística descritiva é útil na exploração e compreensão dos dados.
 
--   Frequência e modea são medidas úteis para descrever atributos categóricos.
+-   Frequência e moda são medidas úteis para descrever atributos categóricos.
 
 -   Para dados contínuos, média e mediana são estatísticas mais usadas para descrever as propriedades dos dados.
 
@@ -195,7 +195,7 @@ editor: source
 
         -   [**arrange:**]{.dstq} para ordendar linhas.
 
-        -   [**mutate:**]{.dstq} para moficiar variáveis.
+        -   [**mutate:**]{.dstq} para modificar variáveis.
 
         -   [**summarize:**]{.dstq} para agregar linhas.
 
@@ -311,7 +311,7 @@ veiculos %>%
 
 -   Tipicamente usado em atributos contínuos para ilustrar a correlação entre duas ou mais variáveis.
 -   Uma das visualizações mais usadas é o [gráfico de pontos]{.dstq}. Ele é usado para responder questões como:
-    -   Há um tributo significativo?
+    -   Há um atributo significativo?
     -   Como os atributos interagem entre si?
     -   Existem outliers nos dados?
 
@@ -338,12 +338,12 @@ veiculos %>%
 ## Distribuição
 
 -   As visualizações de distribuição mostram a distribuição estatística dos valores de um atributo.
--   Uma das visualizações mais usadas é o histrograma, que permite mostrar a dispersão e a assimetria de um atributo.
+-   Uma das visualizações mais usadas é o histograma, que permite mostrar a dispersão e a assimetria de um atributo.
 -   Algumas perguntas que o histograma ajuda a responder são:
     -   De qual distribuição populacional os dados são oriundos?
     -   Onde os dados estão localizados?
     -   Quão dispersos estão os dados?
-    -   Os dados são simétrios?
+    -   Os dados são simétricos?
     -   Há *outliers*?
 
 ## Exemplo
@@ -368,7 +368,7 @@ veiculos %>%
 
 -   Uma visualização de composição mostra a composição dos componentes dos dados.
 -   [Gráficos de barras empilhadas]{.dstq} e [gráficos de pizza]{.dstq} (ou setores) são duas das visualizações de composição mais comumente usadas.
--   Com um gráfico de barras empilhadas, é possível mostrar como um valor total pode ser dividido em partes ou destacar a importância de cada parte em relação ao valor total. Ele ajuda a responder pergutnas como:
+-   Com um gráfico de barras empilhadas, é possível mostrar como um valor total pode ser dividido em partes ou destacar a importância de cada parte em relação ao valor total. Ele ajuda a responder perguntas como:
     -   Como as distribuições variam dentro dos subgrupos?
     -   Qual é a mudança relativa na composição ao longo do tempo?
     -   Quanto um subgrupo contribui para o total?
@@ -525,7 +525,7 @@ veiculos %>% select(citympg, displacement, highwaympg) %>% summary()
 
 -   O ruído representa a variação aleatória nos dados e pode ser introduzido durante a coleta e o processamento dos dados.
 -   É importante que os algoritmos de aprendizado de máquina possam lidar com o ruído, minimizando seu impacto em vez de tentar removê-lo.
--   Se o ruído for um problema para o método, podemos usar algum método de suavização:
+-   Se o ruído for um problema para o método, podemos usar algum método de suavização, tais como:
     -   suavização com médias de intervalos;
     -   suavização com limites de intervalos;
     -   suavização por agrupamento;
@@ -537,8 +537,7 @@ veiculos %>% select(citympg, displacement, highwaympg) %>% summary()
 
 -   Envolve a divisão dos dados em intervalos e a substituição dos valores em cada intervalo pela média desses valores.
 -   O número de intervalos é determinado pelo usuário, e a escolha afeta a quantidade de redução de ruído: mais intervalos reduzem o ruído menos, enquanto menos intervalos reduzem o ruído mais.
--   Como exemplo, em um conjunto de dados ordenados, ao dividir em três intervalos, substituímos os valores em cada intervalo pela média do intervalo, resultando em uma versão suavizada dos dados.
--   Exemplo: $$ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 $$ $$ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} $$ $$ \color{blue}{9, 9, 9, 9}, 23, 23, 23, 23, \color{red}{29, 29, 29, 29} $$
+-   Exemplo: dividir um conjunto de dados ordenados em três intervalos.$$ 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34 $$ $$ \color{blue}{4,8, 9,15}, {21, 21, 24, 25}, \color{red}{26, 28, 29,34} $$ $$ \color{blue}{9, 9, 9, 9}, 23, 23, 23, 23, \color{red}{29, 29, 29, 29} $$
 
 ## Limpeza dos dados
 #### Suavização com limites de intervalos
@@ -574,24 +573,24 @@ veiculos %>% select(citympg, displacement, highwaympg) %>% summary()
 -   Em problemas de classificação, quanto mais exemplos de treinamento o algoritmo recebe, melhor é sua capacidade de atribuir rótulos aos novos dados.
 -   Quando uma das classes possui muito mais observações que a outra, isso desequilibra a capacidade do modelo de aprender e fazer previsões precisas.
 -   Isso pode levar a resultados tendenciosos, onde o modelo tem um bom desempenho para a classe majoritária, mas não consegue prever com precisão a classe minoritária.
--   Outro problema é que o aprendizado com dadso desbalanceados pode resultar em modelos com precisão preditiva enganosamente otimista (mais fáci clssificar todo mundo em uma classe, já que poucas observações pertencem à outra).
+-   Outro problema é que o aprendizado com dados desbalanceados pode resultar em modelos com precisão preditiva enganosamente otimista (mais fáci classificar todo mundo em uma classe, já que poucas observações pertencem à outra).
 
 ## Limpeza dos dados
-### Desbalanceamanto de classe
+### Desbalanceamento de classe
 
-Métodos para resulver o problema:
+Métodos para resolver o problema:
 
 -   [Coletar mais dados]{.dstq} para minimizar o desbalanceamento.
 -   [Mudar a métrica de desempenho:]{.dstq} utilizar medidas como *precisão*, *recall*, *kappa* e a *curva ROC* em vez de depender unicamente da acurácia (precisão).
 -   [Tentar um algoritmo diferente:]{.dstq} considere a utilização de algoritmos como árvores de decisão e florestas aleatórias, que lidam bem com o desbalanceamento de classes em problemas de machine learning.
--   [Reamostragem dos dados:]{.dstq} subamostrar a classe majoritária (*under-sampling*) ou a superamostrar da classe minoritária (*over-sampling*), inclusive com a geração de exemplos sintéticos, como feito pelo algoritmo *Synthetic Minority Over-sampling Technique* (SMOTE).
+-   [Reamostragem dos dados:]{.dstq} subamostrar a classe majoritária (*under-sampling*) ou a superamostrar da classe minoritária (*over-sampling*), incluindo a geração de exemplos sintéticos, como feito pelo algoritmo *Synthetic Minority Over-sampling Technique* (SMOTE).
 
 # Transformação dos dados
 
 ## Transformação dos dados
 
 -   Frequentemente é preciso modificar a estrutura ou características dos dados para atender às necessidades da aprendizagem de máquina.
--   Algumass técnicas usadas são:
+-   Algumas técnicas usadas são:
     -   Normalização;
     -   Discretização;
     -   Codificação de variáveis *dummy*.
@@ -638,7 +637,7 @@ Métodos para resulver o problema:
 :::
 
 ::: {.column width="60%" .fragment}
-- Como o maior valo é 1269.6, vamos dividir por $10^4$
+- Como o maior valor é 1269.6, vamos dividir por $10^4$
 
 ```{r}
 #| warning: false
@@ -650,7 +649,7 @@ Métodos para resulver o problema:
 
 veiculos %>%
   select(co2emissions) %>%
-  mutate(co2emissions_d = co2emissions / (10^4)) %>%
+  mutate(co2emissions_d = co2emissions/(10^4)) %>%
   summary()
 ```
 :::
@@ -693,7 +692,7 @@ veiculos %>%
 ### Normalização
 #### Normalização Min-Max
 
-- Os dados originais são trasnformados para um novo intervalo definido pelos limites inferior e superior especificados pelo usuário, frequentemente 0 e 1.
+- Os dados originais são transformados para um novo intervalo definido pelos limites inferior e superior especificados pelo usuário, frequentemente 0 e 1.
 - Matematicamente, temos
 $$ v' = \frac{v-min_v}{max_v - min_v}\times (L_{sup} -L_{inf}) + L_{inf}, $$
 em que $min_v$ e $max_v$ são, respectivamente, o menor e o maior valor observado em $v$ e $L_{inf}$ e $L_{sup}$ são, resepctivamente, os limites inferior e superior do intervalo definido pelo usuário.
@@ -724,7 +723,7 @@ veiculos %>%
 ### Normalização
 #### Transformação logarítmica
 
-- As transformações anteriores são boas quandoos dados são simétricos.
+- As transformações anteriores são boas quando os dados são simétricos.
 - A transformação logarítmica é mais adequada para distribuições assimétricas e dados com valores que variam amplamente em magnitude.
 - A transformação é $$ v' = \log(v). $$
 
@@ -807,6 +806,9 @@ summary(veiculos2)
 ```
 :::
 
+## Transformação dos dados
+### Variáveis dummy
+
 :::{.fragment}
 ```{r}
 #| warning: false
@@ -827,7 +829,7 @@ head(veiculos2)
 
 ## Redução dos dados
 
--  Algumas vezes precisamos reduzir os número de observações, o número de variáveis, ou ambos para utlização de um modelo de aprendizado de máquina.
+-  Algumas vezes precisamos reduzir os número de observações, o número de variáveis, ou ambos para utilização de um modelo de aprendizado de máquina.
 - As técnicas mais comuns são:
     - Amostragem;
     - Redução de dimensionalidade.
